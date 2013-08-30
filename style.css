@@ -1,0 +1,353 @@
+#all-controls .play-all {
+  background-image: url('img/play.button.png');
+  background-size: cover;
+  width: 8em;
+  height: 8em;
+}
+
+#all-controls .pause-all {
+  background-image: url('img/pause.button.png');
+  background-size: cover;
+  width: 8em;
+  height: 8em;
+}
+
+#image-preload {
+  background-image: url('img/pause.button.png');
+}
+
+.sliders .ui-slider-track {
+  margin-left: auto;
+  margin-right: auto;
+  max-width:75%
+}
+
+/* Style page container and remove jqm default background */
+
+html {
+  height:100%;
+}
+
+.ui-mobile {
+  background-color: #000;
+}
+
+#page-container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  height: 100%;
+  }
+
+.ui-page.ui-body-c.ui-page-active {
+  background: #000; 
+  }
+
+/* end */
+
+/* Style text */
+
+#site-title {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: center;
+  padding: 1em 0 0 0;
+  -webkit-text-stroke: 1px;
+  color: #000;
+}
+
+#site-title h1 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 5%;
+  margin-right: 5%;  
+}
+
+#intro-text {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  -webkit-text-stroke: 0.3px;
+  color: #000;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#footer {
+  font-family: Montserrat;
+  text-align: center;
+  font-size: 0.8em;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-text-stroke: 0.3px;
+  color: white;
+  background-color: #000;
+}
+
+#footer p {
+  margin: 0 0 0 0;
+  padding-top: 5px;
+  padding-bottom: 0px;
+}
+
+#footer a {
+  text-shadow: none !important;
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: normal !important;
+}
+
+/* end */
+
+/* Style play button */
+
+#play-pause-container {
+  width: 8em;
+  height: 8em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+
+/* Style sliders */
+
+#sliders-container .ui-slider-track.ui-btn-down-c.ui-btn-corner-all {
+  background: #000;
+  border: 1px solid white;
+  background-image: none;
+}
+
+#sliders-container .ui-slider-handle.ui-btn.ui-btn-up-c.ui-shadow.ui-btn-corner-all { 
+  background: white;
+  background-image: none;
+  border: 2px solid #000;
+  width: 37px;
+  height: 37px;
+  margin: -20px 0 0 -20px;
+  border-radius: 99em;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+}
+
+#sliders-container .ui-btn.ui-slider-handle { 
+  background: white;
+  background-image: none;
+  border: 2px solid #000;
+  width: 37px;
+  height: 37px;
+  margin: -20px 0 0 -20px;
+  border-radius: 99em;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+}
+
+#sliders-container .ui-focus, .ui-btn-focus {
+  box-shadow: inset 0 0 0px #000, 0 0 8px #000;
+  -webkit-box-shadow: inset 0 0 0px #000, 0 0 8px #000;
+  -moz-box-shadow: inset 0 0 0px #000, 0 0 8px #000;
+}
+
+/* end */
+
+/* Style slider containers */
+
+.sliders .ui-input-text {
+  text-align: center;
+  font-size: 2em;
+  font-family: Montserrat;
+  -webkit-text-stroke:0.3px #000;
+  margin: 0 0 20px 0;
+  color: #000;
+}
+
+#waves-slider-container,
+#rain-slider-container,
+#thunder-slider-container,
+#humans-slider-container {
+  height: 150px;
+  position: relative;
+}
+
+.slider-background {
+  position: absolute;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+#waves-slider-background {
+  background-image: url('img/waves.jpg');
+}
+
+#rain-slider-background {
+  background-image: url('img/raining.jpg');
+}
+
+#thunder-slider-background {
+  background-image: url('img/thunder.jpg');
+}
+
+#humans-slider-background {
+  background-image: url('img/humans.jpg');
+}
+
+.slider-inner {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+#waves-slider-label,
+#rain-slider-label,
+#thunder-slider-label,
+#humans-slider-label {
+  margin-left: 40%;
+  margin-right: 40%;
+  background: rgba(255,255,255,0.7);
+  margin-top: 20px;
+}
+
+#waves-slider-container {
+  border-top: 3px solid #000;
+}
+
+#waves-slider-container,
+#rain-slider-container,
+#thunder-slider-container,
+#humans-slider-container {
+  border-bottom: 3px solid #000;
+}
+
+/* Begin responsive settings for smaller viewports */
+
+@media screen and (max-width: 640px) {
+
+  #waves-slider-label,
+  #rain-slider-label,
+  #thunder-slider-label,
+  #humans-slider-label {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10px;
+  }
+  
+   .sliders .ui-input-text {
+    font-size: 1.5em
+  }
+  
+  #sliders-container .ui-slider-handle.ui-btn.ui-btn-up-c.ui-shadow.ui-btn-corner-all { 
+  width: 28px;
+  height: 28px;
+  margin: -15px 0 0 -15px;  
+  }
+ 
+  
+  #sliders-container .ui-btn.ui-slider-handle {
+  width: 28px;
+  height: 28px;
+  margin: -15px 0 0 -15px; 
+  }
+}
+
+@media screen and (max-width: 540px) {
+
+  #site-title {
+    font-size: 1.3em;
+  }
+  
+  #intro-text {
+    font-size: 0.8em;
+  }
+  
+  #waves-slider-container,
+  #rain-slider-container,
+  #thunder-slider-container,
+  #humans-slider-container {
+    height: 100px;
+  }
+  
+  #waves-slider-label,
+  #rain-slider-label,
+  #thunder-slider-label,
+  #humans-slider-label {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 5px;
+  }
+  
+  .sliders .ui-input-text {
+    font-size: 1.2em
+  }
+}
+
+@media screen and (max-width: 440px) {
+
+  #site-title {
+    font-size: 1em;
+  }
+  
+  #intro-text {
+    font-size: 0.8em;
+  }
+  
+  #waves-slider-container,
+  #rain-slider-container,
+  #thunder-slider-container,
+  #humans-slider-container {
+    height: 90px;
+  }
+  
+  #waves-slider-label,
+  #rain-slider-label,
+  #thunder-slider-label,
+  #humans-slider-label {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10px;
+  }
+  
+  .sliders .ui-input-text {
+    font-size: 1.2em
+  }
+}
+
+@media screen and (max-width: 340px) {
+
+  #site-title {
+    font-size: 0.7em;
+  }
+  
+  #all-controls .play-all,
+  #all-controls .pause-all,
+  #play-pause-container {
+    width: 7em;
+    height: 7em;
+    margin-bottom: 10px;
+  }
+  
+  #waves-slider-container,
+  #rain-slider-container,
+  #thunder-slider-container,
+  #humans-slider-container {
+    height: 80px;
+  }  
+}
+
+/* end */
+
+/* Style info page */
+
+#infopage {
+  font-size: 1em;
+  font-family: Helvetica;
+  max-width: 40em;
+  margin: 0 auto 0 auto;
+}

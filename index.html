@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>A Soft Murmur</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.css" />
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<link rel="icon" href="favicon.png">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42700626-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+var rainplayer = document.getElementById("rainplayer"); 
+var rainglueplayer = document.getElementById("rainglueplayer"); 
+var wavesplayer = document.getElementById("wavesplayer"); 
+var wavesglueplayer = document.getElementById("wavesglueplayer"); 
+var thunderplayer = document.getElementById("thunderplayer"); 
+var thunderglueplayer = document.getElementById("thunderglueplayer"); 
+var humansplayer = document.getElementById("humansplayer"); 
+var humansglueplayer = document.getElementById("humansglueplayer"); 
+var playstatus = $("#play-pause-button").hasClass("pause-all");
+
+
+  $("#rainplayer").bind('timeupdate', function() {
+    if (rainplayer.currentTime >= 576 && rainglueplayer.paused && !rainplayer.paused){
+      $("#rainglueplayer")[0].currentTime = 0;
+      $("#rainglueplayer")[0].play();
+    }
+  })
+
+  $("#rainglueplayer").bind('timeupdate', function() {
+    if (rainglueplayer.currentTime >= 10 && rainplayer.paused && !rainglueplayer.paused){
+      $("#rainplayer")[0].currentTime = 0;
+      $("#rainplayer")[0].play();
+    }
+  })
+  
+  $("#wavesplayer").bind('timeupdate', function() {
+    if (wavesplayer.currentTime >= 255 && wavesglueplayer.paused && !wavesplayer.paused){
+      $("#wavesglueplayer")[0].currentTime = 0;
+      $("#wavesglueplayer")[0].play();
+    }
+  })
+
+  $("#wavesglueplayer").bind('timeupdate', function() {
+    if (wavesglueplayer.currentTime >= 10 && wavesplayer.paused && !wavesglueplayer.paused){
+      $("#wavesplayer")[0].currentTime = 0;
+      $("#wavesplayer")[0].play();
+    }
+  })
+  
+    $("#thunderplayer").bind('timeupdate', function() {
+    if (thunderplayer.currentTime >= 488 && thunderglueplayer.paused && !thunderplayer.paused){
+      $("#thunderglueplayer")[0].currentTime = 0;
+      $("#thunderglueplayer")[0].play();
+    }
+  })
+
+  $("#thunderglueplayer").bind('timeupdate', function() {
+    if (thunderglueplayer.currentTime >= 10 && thunderplayer.paused && !thunderglueplayer.paused){
+      $("#thunderplayer")[0].currentTime = 0;
+      $("#thunderplayer")[0].play();
+    }
+  })
+  
+    $("#humansplayer").bind('timeupdate', function() {
+    if (humansplayer.currentTime >= 321 && humansglueplayer.paused && !humansplayer.paused){
+      $("#humansglueplayer")[0].currentTime = 0;
+      $("#humansglueplayer")[0].play();
+    }
+  })
+
+  $("#humansglueplayer").bind('timeupdate', function() {
+    if (humansglueplayer.currentTime >= 10 && humansplayer.paused && !humansglueplayer.paused){
+      $("#humansplayer")[0].currentTime = 0;
+      $("#humansplayer")[0].play();
+    }
+  })  
+
+// fake seamless looping
+
+  $("#rainplayer")[0].volume =($("#rain-slider").val());
+  $("#rainglueplayer")[0].volume =($("#rain-slider").val());
+  $("#rain-slider-background").css({'opacity': ($("#rain-slider").val())});  
+ 
+  $("#rain-slider").on( "change", function( event, ui ) {
+    $("#rainplayer")[0].volume =($("#rain-slider").val());
+    $("#rainglueplayer")[0].volume =($("#rain-slider").val());
+    $("#rain-slider-background").css({'opacity': ($("#rain-slider").val())});      
+  })
+    
+  $("#wavesplayer")[0].volume =($("#waves-slider").val());
+  $("#wavesglueplayer")[0].volume =($("#waves-slider").val());
+  $("#waves-slider-background").css({'opacity': ($("#waves-slider").val())});  
+    
+  $("#waves-slider").on( "change", function( event, ui ) {
+    $("#wavesplayer")[0].volume =($("#waves-slider").val());
+    $("#wavesglueplayer")[0].volume =($("#waves-slider").val());
+    $("#waves-slider-background").css({'opacity': ($("#waves-slider").val())});
+  })
+  
+  $("#thunderplayer")[0].volume =($("#thunder-slider").val());
+  $("#thunderglueplayer")[0].volume =($("#thunder-slider").val());
+  $("#thunder-slider-background").css({'opacity': ($("#thunder-slider").val())});
+  
+  $("#thunder-slider").on( "change", function( event, ui ) {
+    $("#thunderplayer")[0].volume =($("#thunder-slider").val());
+    $("#thunderglueplayer")[0].volume =($("#thunder-slider").val());
+    $("#thunder-slider-background").css({'opacity': ($("#thunder-slider").val())});
+  })  
+  
+  $("#humansplayer")[0].volume =($("#humans-slider").val());
+  $("#humansglueplayer")[0].volume =($("#humans-slider").val());
+  $("#humans-slider-background").css({'opacity': ($("#humans-slider").val())});  
+  
+  $("#humans-slider").on( "change", function( event, ui ) {
+    $("#humansplayer")[0].volume =($("#humans-slider").val());
+    $("#humansglueplayer")[0].volume =($("#humans-slider").val());
+    $("#humans-slider-background").css({'opacity': ($("#humans-slider").val())});
+  })
+   
+  
+// update the audio volume when the slider has been moved
+    
+  $("#play-pause-button").click(function(){
+      if($(this).hasClass('play-all')) {
+        $("#wavesplayer")[0].play();
+        $("#rainplayer")[0].play();
+        $("#thunderplayer")[0].play(); 
+        $("#humansplayer")[0].play();                
+        $(this).attr("class", "pause-all");
+      }
+      else {
+        $("#wavesplayer")[0].pause();
+        $("#wavesglueplayer")[0].pause();
+        $("#rainplayer")[0].pause();
+        $("#rainglueplayer")[0].pause();
+        $("#thunderplayer")[0].pause();  
+        $("#thunderglueplayer")[0].pause();
+        $("#humansplayer")[0].pause();  
+        $("#humansglueplayer")[0].pause();               
+        $(this).attr("class", "play-all");
+      }
+  })
+  
+        
+//play-all and pause-all function
+
+})
+</script>
+</head>
+
+<body data-role="none">
+<div id="page-container">
+
+<!-- Audio players without controls -->
+
+<div class="audioplayer">
+  <audio id="wavesplayer" loop>
+    <source src="audio/waves.fade.mp4" type="audio/mp4" />
+    <source src="audio/waves.fade.ogg" type="audio/ogg" />
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="wavesglueplayer">
+    <source src="audio/waves.glue.mp4" type="audio/mp4" />
+    <source src="audio/waves.glue.ogg" type="audio/ogg" />
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="rainplayer" loop>
+    <source src="audio/rain.fade.mp4" type="audio/mp4">
+    <source src="audio/rain.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="rainglueplayer">
+    <source src="audio/rain.glue.mp4" type="audio/mp4">
+    <source src="audio/rain.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="thunderplayer" loop>
+    <source src="audio/thunder.fade.mp4" type="audio/mp4">
+    <source src="audio/thunder.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="thunderglueplayer">
+    <source src="audio/thunder.glue.mp4" type="audio/mp4">
+    <source src="audio/thunder.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="humansplayer" loop>
+    <source src="audio/humans.fade.mp4" type="audio/mp4">
+    <source src="audio/humans.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="humansglueplayer">
+    <source src="audio/humans.glue.mp4" type="audio/mp4">
+    <source src="audio/humans.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<!-- end audio players -->
+
+<div id="site-title">
+  <h1>A SOFT MURMUR</h1>
+</div>
+
+<div id="intro-text">
+  <p>Ambient sounds to wash away distraction.</p>
+</div>
+
+<div id="all-controls">
+  <div id="play-pause-container">
+    <a href="#">
+      <div id="play-pause-button" class="play-all"></div>
+    </a>
+  </div>
+</div>
+
+<div id="sliders-container">
+
+<div id="waves-slider-container" class="sliders">
+  <div id="waves-slider-background" class="slider-background"></div>
+  <div id="waves-slider-container-inner" class="slider-inner">
+    <label for="waves-slider">Waves</label>
+      <input type="range" id="waves-slider" value="0.2" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+  </div>
+</div>
+
+<div id="rain-slider-container" class="sliders">
+  <div id="rain-slider-background" class="slider-background"></div>
+  <div id="rain-slider-container-inner" class="slider-inner">
+    <label for="rain-slider">Rain</label>
+      <input type="range" id="rain-slider" value="0.3" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+  </div>
+</div>
+
+<div id="thunder-slider-container" class="sliders">
+  <div id="thunder-slider-background" class="slider-background"></div>
+  <div id="thunder-slider-container-inner" class="slider-inner">
+    <label for="thunder-slider">Thunder</label>
+      <input type="range" id="thunder-slider" value="0.0" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+  </div>
+</div>
+
+<div id="humans-slider-container" class="sliders">
+  <div id="humans-slider-background" class="slider-background"></div>
+  <div id="humans-slider-container-inner" class="slider-inner">
+    <label for="humans-slider">Humans</label>
+      <input type="range" id="humans-slider" value="0.0" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+  </div>
+</div>
+
+</div>
+
+<div id="image-preload">
+</div>
+
+<div id="footer">
+<p><a href="info.html" data-ajax="false" target="_blank">more info<a></p>
+</div>
+
+</div>
+</body>
+</html>
