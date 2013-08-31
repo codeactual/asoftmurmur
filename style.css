@@ -209,6 +209,10 @@ html {
   margin-top: 20px;
 }
 
+#waves-slider-container {
+  border-top: 3px solid #000;
+}
+
 .sliders {
   border-bottom: 3px solid #000;
 }
