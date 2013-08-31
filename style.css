@@ -33,7 +33,7 @@ html {
 }
 
 #page-container {
-  max-width: 800px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   background: white;
@@ -126,9 +126,9 @@ html {
   background: white;
   background-image: none;
   border: 2px solid #000;
-  width: 37px;
-  height: 37px;
-  margin: -20px 0 0 -20px;
+  width: 28px;
+  height: 28px;
+  margin: -15px 0 0 -15px;  
   border-radius: 99em;
   -webkit-border-radius: 99em;
   -moz-border-radius: 99em;
@@ -138,9 +138,9 @@ html {
   background: white;
   background-image: none;
   border: 2px solid #000;
-  width: 37px;
-  height: 37px;
-  margin: -20px 0 0 -20px;
+  width: 28px;
+  height: 28px;
+  margin: -15px 0 0 -15px;  
   border-radius: 99em;
   -webkit-border-radius: 99em;
   -moz-border-radius: 99em;
@@ -158,15 +158,15 @@ html {
 
 .sliders .ui-input-text {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5em;
   font-family: Montserrat;
   -webkit-text-stroke:0.3px #000;
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
   color: #000;
 }
 
 .sliders {
-  height: 150px;
+  height: 100px;
   position: relative;
 }
 
@@ -206,7 +206,7 @@ html {
   margin-left: 40%;
   margin-right: 40%;
   background: rgba(255,255,255,0.7);
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 #waves-slider-container {
@@ -226,23 +226,7 @@ html {
     margin-right: 30%;
     margin-top: 10px;
   }
-  
-   .sliders .ui-input-text {
-    font-size: 1.5em
-  }
-  
-  #sliders-container .ui-slider-handle.ui-btn.ui-btn-up-c.ui-shadow.ui-btn-corner-all { 
-  width: 28px;
-  height: 28px;
-  margin: -15px 0 0 -15px;  
-  }
- 
-  
-  #sliders-container .ui-btn.ui-slider-handle {
-  width: 28px;
-  height: 28px;
-  margin: -15px 0 0 -15px; 
-  }
+
 }
 
 @media screen and (max-width: 540px) {
