@@ -45,9 +45,7 @@ var thunderglueplayer = $('#thunderglueplayer');
 var humansplayer = $('#humansplayer');
 var humansglueplayer = $('#humansglueplayer');
 
-var playstatus = $("#play-pause-button").hasClass("pause-all");
-
-  function stuff(player, otherPlayer, time) {
+  function sloop(player, otherPlayer, time) {
     if (player.currentTime >= time && otherPlayer.paused && !player.paused){
       otherPlayer.currentTime = 0;
       otherPlayer.play();
@@ -57,104 +55,129 @@ var playstatus = $("#play-pause-button").hasClass("pause-all");
 // function to fake seamless looping
 
   rainplayer.bind('timeupdate', function() {
-    stuff(rainplayer0, rainglueplayer0, 576);
+    sloop(rainplayer0, rainglueplayer0, 576);
   })
 
   rainglueplayer.bind('timeupdate', function() {
-    stuff(rainglueplayer0, rainplayer0, 10);
+    sloop(rainglueplayer0, rainplayer0, 10);
   })
   
   wavesplayer.bind('timeupdate', function() {
-    stuff(wavesplayer0, wavesglueplayer0, 255);
+    sloop(wavesplayer0, wavesglueplayer0, 255);
   })
 
   wavesglueplayer.bind('timeupdate', function() {
-    stuff(wavesglueplayer0, wavesplayer0, 10);
+    sloop(wavesglueplayer0, wavesplayer0, 10);
   })
   
   thunderplayer.bind('timeupdate', function() {
-    stuff(thunderplayer0, thunderglueplayer0, 488);
+    sloop(thunderplayer0, thunderglueplayer0, 488);
   })
 
   thunderglueplayer.bind('timeupdate', function() {
-    stuff(thunderglueplayer0, thunderplayer0, 10);
+    sloop(thunderglueplayer0, thunderplayer0, 10);
   })
   
   humansplayer.bind('timeupdate', function() {
-    stuff(humansplayer0, humansglueplayer0, 321);
+    sloop(humansplayer0, humansglueplayer0, 321);
   })
 
   humansglueplayer.bind('timeupdate', function() {
-    stuff(humansglueplayer0, humansplayer0, 10);
+    sloop(humansglueplayer0, humansplayer0, 10);
   })  
 
 // looping parameters for each sample
 
-  $("#rainplayer")[0].volume =($("#rain-slider").val());
-  $("#rainglueplayer")[0].volume =($("#rain-slider").val());
-  $("#rain-slider-background").css({'opacity': ($("#rain-slider").val())});  
- 
-  $("#rain-slider").on( "change", function( event, ui ) {
-    $("#rainplayer")[0].volume =($("#rain-slider").val());
-    $("#rainglueplayer")[0].volume =($("#rain-slider").val());
-    $("#rain-slider-background").css({'opacity': ($("#rain-slider").val())});      
-  })
-    
-  $("#wavesplayer")[0].volume =($("#waves-slider").val());
-  $("#wavesglueplayer")[0].volume =($("#waves-slider").val());
-  $("#waves-slider-background").css({'opacity': ($("#waves-slider").val())});  
-    
-  $("#waves-slider").on( "change", function( event, ui ) {
-    $("#wavesplayer")[0].volume =($("#waves-slider").val());
-    $("#wavesglueplayer")[0].volume =($("#waves-slider").val());
-    $("#waves-slider-background").css({'opacity': ($("#waves-slider").val())});
-  })
+var rainslider = $("#rain-slider");
+var wavesslider = $("#waves-slider");
+var thunderslider = $("#thunder-slider");
+var humansslider = $("#humans-slider");
+
+var rainbackground = $("#rain-slider-background");
+var wavesbackground = $("#waves-slider-background");
+var thunderbackground = $("#thunder-slider-background");
+var humansbackground = $("#humans-slider-background");
+
+  function slidervol(player, glueplayer, slider, sliderbackground) {
+    player.volume = slider.val();
+    glueplayer.volume = slider.val();
+    sliderbackground.css({'opacity': slider.val() });
+      if(player.volume > 0.02 && $("#play-pause-button").hasClass('pause-all')) {
+        player.play();
+      }
+      if(player.volume <= 0.02) {
+        player.pause();
+      }
+      if(glueplayer.volume <= 0.02) {
+        glueplayer.pause();
+      }
+  }
   
-  $("#thunderplayer")[0].volume =($("#thunder-slider").val());
-  $("#thunderglueplayer")[0].volume =($("#thunder-slider").val());
-  $("#thunder-slider-background").css({'opacity': ($("#thunder-slider").val())});
+// function updates volume at load and when slider moves
   
-  $("#thunder-slider").on( "change", function( event, ui ) {
-    $("#thunderplayer")[0].volume =($("#thunder-slider").val());
-    $("#thunderglueplayer")[0].volume =($("#thunder-slider").val());
-    $("#thunder-slider-background").css({'opacity': ($("#thunder-slider").val())});
+  slidervol(rainplayer0, rainglueplayer0, rainslider, rainbackground);
+  
+  rainslider.on( 'change', function( event, ui ) {
+    slidervol(rainplayer0, rainglueplayer0, rainslider, rainbackground);
+  })
+
+  slidervol(wavesplayer0, wavesglueplayer0, wavesslider, wavesbackground);
+
+  wavesslider.on( 'change', function( event, ui ) {
+    slidervol(wavesplayer0, wavesglueplayer0, wavesslider, wavesbackground);
   })  
   
-  $("#humansplayer")[0].volume =($("#humans-slider").val());
-  $("#humansglueplayer")[0].volume =($("#humans-slider").val());
-  $("#humans-slider-background").css({'opacity': ($("#humans-slider").val())});  
+  slidervol(thunderplayer0, thunderglueplayer0, thunderslider, thunderbackground);
   
-  $("#humans-slider").on( "change", function( event, ui ) {
-    $("#humansplayer")[0].volume =($("#humans-slider").val());
-    $("#humansglueplayer")[0].volume =($("#humans-slider").val());
-    $("#humans-slider-background").css({'opacity': ($("#humans-slider").val())});
-  })
-   
+  thunderslider.on( 'change', function( event, ui ) {
+    slidervol(thunderplayer0, thunderglueplayer0, thunderslider, thunderbackground);
+  })  
+
+  slidervol(humansplayer0, humansglueplayer0, humansslider, humansbackground);
   
-// update the audio volume when the slider has been moved
+  humansslider.on( 'change', function( event, ui ) {
+    slidervol(humansplayer0, humansglueplayer0, humansslider, humansbackground);
+  })   
+  
+// parameters to update audio by slider
+
+var ppbutton = $("#play-pause-button");
     
-  $("#play-pause-button").click(function(){
+  ppbutton.click(function(){
       if($(this).hasClass('play-all')) {
-        $("#wavesplayer")[0].play();
-        $("#rainplayer")[0].play();
-        $("#thunderplayer")[0].play(); 
-        $("#humansplayer")[0].play();                
+        playall();               
         $(this).attr("class", "pause-all");
       }
       else {
-        $("#wavesplayer")[0].pause();
-        $("#wavesglueplayer")[0].pause();
-        $("#rainplayer")[0].pause();
-        $("#rainglueplayer")[0].pause();
-        $("#thunderplayer")[0].pause();  
-        $("#thunderglueplayer")[0].pause();
-        $("#humansplayer")[0].pause();  
-        $("#humansglueplayer")[0].pause();               
+        pauseall();            
         $(this).attr("class", "play-all");
       }
   })
   
-        
+  function playif(player){
+      if(player.volume > 0.02) {
+        player.play();
+      }
+  }
+  
+  function playall(){
+    playif(rainplayer0);
+    playif(wavesplayer0);
+    playif(thunderplayer0);
+    playif(humansplayer0);
+  }
+  
+  function pauseall(){
+    rainplayer0.pause();
+    rainglueplayer0.pause();
+    wavesplayer0.pause();
+    wavesglueplayer0.pause();
+    thunderplayer0.pause();
+    thunderglueplayer0.pause();
+    humansplayer0.pause();
+    humansglueplayer0.pause();
+  }  
+  
 //play-all and pause-all function
 
 })
