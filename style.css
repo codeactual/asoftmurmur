@@ -165,10 +165,7 @@ html {
   color: #000;
 }
 
-#waves-slider-container,
-#rain-slider-container,
-#thunder-slider-container,
-#humans-slider-container {
+.sliders {
   height: 150px;
   position: relative;
 }
@@ -205,24 +202,14 @@ html {
   z-index: 1;
 }
 
-#waves-slider-label,
-#rain-slider-label,
-#thunder-slider-label,
-#humans-slider-label {
+.slider-labels {
   margin-left: 40%;
   margin-right: 40%;
   background: rgba(255,255,255,0.7);
   margin-top: 20px;
 }
 
-#waves-slider-container {
-  border-top: 3px solid #000;
-}
-
-#waves-slider-container,
-#rain-slider-container,
-#thunder-slider-container,
-#humans-slider-container {
+.sliders {
   border-bottom: 3px solid #000;
 }
 
@@ -230,10 +217,7 @@ html {
 
 @media screen and (max-width: 640px) {
 
-  #waves-slider-label,
-  #rain-slider-label,
-  #thunder-slider-label,
-  #humans-slider-label {
+  .slider-labels {
     margin-left: 30%;
     margin-right: 30%;
     margin-top: 10px;
@@ -267,17 +251,11 @@ html {
     font-size: 0.8em;
   }
   
-  #waves-slider-container,
-  #rain-slider-container,
-  #thunder-slider-container,
-  #humans-slider-container {
+  .sliders {
     height: 100px;
   }
   
-  #waves-slider-label,
-  #rain-slider-label,
-  #thunder-slider-label,
-  #humans-slider-label {
+  .slider-labels {
     margin-left: 25%;
     margin-right: 25%;
     margin-top: 5px;
@@ -298,17 +276,11 @@ html {
     font-size: 0.8em;
   }
   
-  #waves-slider-container,
-  #rain-slider-container,
-  #thunder-slider-container,
-  #humans-slider-container {
+  .sliders {
     height: 90px;
   }
   
-  #waves-slider-label,
-  #rain-slider-label,
-  #thunder-slider-label,
-  #humans-slider-label {
+  .slider-labels {
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 10px;
@@ -333,10 +305,7 @@ html {
     margin-bottom: 10px;
   }
   
-  #waves-slider-container,
-  #rain-slider-container,
-  #thunder-slider-container,
-  #humans-slider-container {
+  .sliders {
     height: 80px;
   }  
 }
