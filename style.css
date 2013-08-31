@@ -202,7 +202,7 @@ html {
   z-index: 1;
 }
 
-.slider-labels {
+.labelfix {
   margin-left: 40%;
   margin-right: 40%;
   background: rgba(255,255,255,0.7);
@@ -217,7 +217,7 @@ html {
 
 @media screen and (max-width: 640px) {
 
-  .slider-labels {
+  .labelfix {
     margin-left: 30%;
     margin-right: 30%;
     margin-top: 10px;
@@ -255,7 +255,7 @@ html {
     height: 100px;
   }
   
-  .slider-labels {
+  .labelfix {
     margin-left: 25%;
     margin-right: 25%;
     margin-top: 5px;
@@ -280,7 +280,7 @@ html {
     height: 90px;
   }
   
-  .slider-labels {
+  .labelfix {
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 10px;
