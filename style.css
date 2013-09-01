@@ -19,7 +19,8 @@
 .sliders .ui-slider-track {
   margin-left: auto;
   margin-right: auto;
-  max-width:75%
+  max-width: 75%;
+  height: 10px;
 }
 
 /* Style page container and remove jqm default background */
@@ -163,6 +164,7 @@ html {
   -webkit-text-stroke:0.3px #000;
   margin: 0 0 10px 0;
   color: #000;
+  text-shadow: none;
 }
 
 .sliders {
@@ -189,6 +191,14 @@ html {
 
 #thunder-slider-background {
   background-image: url('img/thunder.jpg');
+}
+
+#fire-slider-background {
+  background-image: url('img/fire.jpg');
+}
+
+#birds-slider-background {
+  background-image: url('img/birds.jpg');
 }
 
 #humans-slider-background {

@@ -33,6 +33,10 @@ var wavesplayer0 = $('#wavesplayer')[0];
 var wavesglueplayer0 = $('#wavesglueplayer')[0];
 var thunderplayer0 = $('#thunderplayer')[0];
 var thunderglueplayer0 = $('#thunderglueplayer')[0];
+var fireplayer0 = $('#fireplayer')[0];
+var fireglueplayer0 = $('#fireglueplayer')[0];
+var birdsplayer0 = $('#birdsplayer')[0];
+var birdsglueplayer0 = $('#birdsglueplayer')[0];
 var humansplayer0 = $('#humansplayer')[0];
 var humansglueplayer0 = $('#humansglueplayer')[0];
 
@@ -42,6 +46,10 @@ var wavesplayer = $('#wavesplayer');
 var wavesglueplayer = $('#wavesglueplayer');
 var thunderplayer = $('#thunderplayer');
 var thunderglueplayer = $('#thunderglueplayer');
+var fireplayer = $('#fireplayer');
+var fireglueplayer = $('#fireglueplayer');
+var birdsplayer = $('#birdsplayer');
+var birdsglueplayer = $('#birdsglueplayer');
 var humansplayer = $('#humansplayer');
 var humansglueplayer = $('#humansglueplayer');
 
@@ -78,6 +86,22 @@ var humansglueplayer = $('#humansglueplayer');
     sloop(thunderglueplayer0, thunderplayer0, 10);
   })
   
+  fireplayer.bind('timeupdate', function() {
+    sloop(fireplayer0, fireglueplayer0, 488);
+  })
+
+  fireglueplayer.bind('timeupdate', function() {
+    sloop(fireglueplayer0, fireplayer0, 10);
+  })
+
+  birdsplayer.bind('timeupdate', function() {
+    sloop(birdsplayer0, birdsglueplayer0, 488);
+  })
+
+  birdsglueplayer.bind('timeupdate', function() {
+    sloop(birdsglueplayer0, birdsplayer0, 10);
+  })    
+  
   humansplayer.bind('timeupdate', function() {
     sloop(humansplayer0, humansglueplayer0, 321);
   })
@@ -91,11 +115,15 @@ var humansglueplayer = $('#humansglueplayer');
 var rainslider = $("#rain-slider");
 var wavesslider = $("#waves-slider");
 var thunderslider = $("#thunder-slider");
+var fireslider = $("#fire-slider");
+var birdsslider = $("#birds-slider");
 var humansslider = $("#humans-slider");
 
 var rainbackground = $("#rain-slider-background");
 var wavesbackground = $("#waves-slider-background");
 var thunderbackground = $("#thunder-slider-background");
+var firebackground = $("#fire-slider-background");
+var birdsbackground = $("#birds-slider-background");
 var humansbackground = $("#humans-slider-background");
 
   function slidervol(player, glueplayer, slider, sliderbackground) {
@@ -133,6 +161,18 @@ var humansbackground = $("#humans-slider-background");
     slidervol(thunderplayer0, thunderglueplayer0, thunderslider, thunderbackground);
   })  
 
+  slidervol(fireplayer0, fireglueplayer0, fireslider, firebackground);
+  
+  fireslider.on( 'change', function( event, ui ) {
+    slidervol(fireplayer0, fireglueplayer0, fireslider, firebackground);
+  }) 
+
+  slidervol(birdsplayer0, birdsglueplayer0, birdsslider, birdsbackground);
+  
+  birdsslider.on( 'change', function( event, ui ) {
+    slidervol(birdsplayer0, birdsglueplayer0, birdsslider, birdsbackground);
+  }) 
+
   slidervol(humansplayer0, humansglueplayer0, humansslider, humansbackground);
   
   humansslider.on( 'change', function( event, ui ) {
@@ -164,6 +204,8 @@ var ppbutton = $("#play-pause-button");
     playif(rainplayer0);
     playif(wavesplayer0);
     playif(thunderplayer0);
+    playif(fireplayer0);
+    playif(birdsplayer0);          
     playif(humansplayer0);
   }
   
@@ -174,6 +216,10 @@ var ppbutton = $("#play-pause-button");
     wavesglueplayer0.pause();
     thunderplayer0.pause();
     thunderglueplayer0.pause();
+    fireplayer0.pause();
+    fireglueplayer0.pause();
+    birdsplayer0.pause();
+    birdsglueplayer0.pause();          
     humansplayer0.pause();
     humansglueplayer0.pause();
   }  
@@ -232,6 +278,34 @@ var ppbutton = $("#play-pause-button");
 </div>
 
 <div class="audioplayer">
+  <audio id="fireplayer" loop>
+    <source src="audio/fire.fade.mp4" type="audio/mp4">
+    <source src="audio/fire.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="fireglueplayer">
+    <source src="audio/fire.glue.mp4" type="audio/mp4">
+    <source src="audio/fire.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="birdsplayer" loop>
+    <source src="audio/birds.fade.mp4" type="audio/mp4">
+    <source src="audio/birds.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="birdsglueplayer">
+    <source src="audio/birds.glue.mp4" type="audio/mp4">
+    <source src="audio/birds.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
   <audio id="humansplayer" loop>
     <source src="audio/humans.fade.mp4" type="audio/mp4">
     <source src="audio/humans.fade.ogg" type="audio/ogg">
@@ -286,6 +360,22 @@ var ppbutton = $("#play-pause-button");
   <div id="thunder-slider-container-inner" class="slider-inner">
     <div class="labelfix"> <label for="thunder-slider">Thunder</label> </div>
       <input type="range" id="thunder-slider" value="0.0" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+  </div>
+</div>
+
+<div id="fire-slider-container" class="sliders">
+  <div id="fire-slider-background" class="slider-background"></div>
+  <div id="fire-slider-container-inner" class="slider-inner">
+    <div class="labelfix"> <label for="fire-slider">Fire</label> </div>
+      <input type="range" id="fire-slider" value="0.0" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+  </div>
+</div>
+
+<div id="birds-slider-container" class="sliders">
+  <div id="birds-slider-background" class="slider-background"></div>
+  <div id="birds-slider-container-inner" class="slider-inner">
+    <div class="labelfix"> <label for="birds-slider">Birds</label> </div>
+      <input type="range" id="birds-slider" value="0.0" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
   </div>
 </div>
 
