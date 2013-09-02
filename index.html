@@ -141,42 +141,91 @@ var humansbackground = $("#humans-slider-background");
       }
   }
   
-// function updates volume at load and when slider moves
+  function remembervol(slider, lsvol) {
+    localStorage.setItem(lsvol, slider.val());
+  }
+
   
+  
+// function updates volume at load and when slider moves and sets localstorage
+  
+
+  var lastrainvol = localStorage.getItem("lsrain");
+      if (typeof lastrainvol != "object"){ 
+        rainslider.val(lastrainvol);
+        rainslider.slider("refresh");
+      }
+      
   slidervol(rainplayer0, rainglueplayer0, rainslider, rainbackground);
-  
+    
   rainslider.on( 'change', function( event, ui ) {
     slidervol(rainplayer0, rainglueplayer0, rainslider, rainbackground);
+    remembervol(rainslider, "lsrain");
   })
+  
+  var lastwavesvol = localStorage.getItem("lswaves");
+      if (typeof lastwavesvol != "object"){ 
+        wavesslider.val(lastwavesvol);
+        wavesslider.slider("refresh");
+      }  
 
   slidervol(wavesplayer0, wavesglueplayer0, wavesslider, wavesbackground);
 
   wavesslider.on( 'change', function( event, ui ) {
     slidervol(wavesplayer0, wavesglueplayer0, wavesslider, wavesbackground);
+    remembervol(wavesslider, "lswaves");    
   })  
+
+  var lastthundervol = localStorage.getItem("lsthunder");
+      if (typeof lastthundervol != "object"){ 
+        thunderslider.val(lastthundervol);
+        thunderslider.slider("refresh");
+      }
   
   slidervol(thunderplayer0, thunderglueplayer0, thunderslider, thunderbackground);
   
   thunderslider.on( 'change', function( event, ui ) {
     slidervol(thunderplayer0, thunderglueplayer0, thunderslider, thunderbackground);
+    remembervol(thunderslider, "lsthunder");
   })  
+
+  var lastfirevol = localStorage.getItem("lsfire");
+      if (typeof lastfirevol != "object"){ 
+        fireslider.val(lastfirevol);
+        fireslider.slider("refresh");
+      }
 
   slidervol(fireplayer0, fireglueplayer0, fireslider, firebackground);
   
   fireslider.on( 'change', function( event, ui ) {
     slidervol(fireplayer0, fireglueplayer0, fireslider, firebackground);
+    remembervol(fireslider, "lsfire");
   }) 
+
+  var lastbirdsvol = localStorage.getItem("lsbirds");
+      if (typeof lastbirdsvol != "object"){ 
+        birdsslider.val(lastbirdsvol);
+        birdsslider.slider("refresh");
+      }
 
   slidervol(birdsplayer0, birdsglueplayer0, birdsslider, birdsbackground);
   
   birdsslider.on( 'change', function( event, ui ) {
     slidervol(birdsplayer0, birdsglueplayer0, birdsslider, birdsbackground);
+    remembervol(birdsslider, "lsbirds");
   }) 
+
+  var lasthumansvol = localStorage.getItem("lshumans");
+      if (typeof lasthumansvol != "object"){ 
+        humansslider.val(lasthumansvol);
+        humansslider.slider("refresh");
+      }
 
   slidervol(humansplayer0, humansglueplayer0, humansslider, humansbackground);
   
   humansslider.on( 'change', function( event, ui ) {
     slidervol(humansplayer0, humansglueplayer0, humansslider, humansbackground);
+    remembervol(humansslider, "lshumans");
   })   
   
 // parameters to update audio by slider
