@@ -77,27 +77,44 @@ html {
   margin-right: 5%;
 }
 
+#share-buttons,
 #footer {
   font-family: Montserrat;
   text-align: center;
   font-size: 0.8em;
-  margin-left: auto;
-  margin-right: auto;
   -webkit-text-stroke: 0.3px;
   color: white;
   background-color: #000;
+  text-shadow: none;
+}
+
+#share-buttons {
+  padding: 10px;
+}
+
+#footer {
+  padding: 5px 0 10px 0;
+}
+
+#facebook {
+  float: left;
+}
+
+#googleplus {
+  float: right;
 }
 
 #footer p {
   margin: 0 0 0 0;
-  padding-top: 5px;
+  padding-top: 0px;
   padding-bottom: 0px;
 }
 
+#share-buttons a,
 #footer a {
   text-shadow: none !important;
   color: white !important;
-  text-decoration: none !important;
+  text-decoration: underline !important;
   font-weight: normal !important;
 }
 
