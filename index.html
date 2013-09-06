@@ -25,7 +25,21 @@
 </script>
 <script type="text/javascript">
 
-$(document).ready(function(){
+$(document).ready(function() {
+
+var rainslider = $("#rain-slider");
+var wavesslider = $("#waves-slider");
+var thunderslider = $("#thunder-slider");
+var fireslider = $("#fire-slider");
+var birdsslider = $("#birds-slider");
+var humansslider = $("#humans-slider");
+
+var rainbackground = $("#rain-slider-background");
+var wavesbackground = $("#waves-slider-background");
+var thunderbackground = $("#thunder-slider-background");
+var firebackground = $("#fire-slider-background");
+var birdsbackground = $("#birds-slider-background");
+var humansbackground = $("#humans-slider-background");
 
 var rainplayer0 = $('#rainplayer')[0]; 
 var rainglueplayer0 = $('#rainglueplayer')[0];
@@ -53,78 +67,45 @@ var birdsglueplayer = $('#birdsglueplayer');
 var humansplayer = $('#humansplayer');
 var humansglueplayer = $('#humansglueplayer');
 
-  function sloop(player, otherPlayer, time) {
-    if (player.currentTime >= time && otherPlayer.paused && !player.paused){
-      otherPlayer.currentTime = 0;
-      otherPlayer.play();
-    }
+
+var ppbutton = $("#play-pause-button");
+    
+  function playif(player, glueplayer){
+      if(player.volume > 0.02) {
+        player.play();     
+        if(player.currentTime < 0.01) {
+          glueplayer.currentTime = 12;
+          glueplayer.play();      
+        }
+      }
+        
   }
   
-// function to fake seamless looping
-
-  rainplayer.bind('timeupdate', function() {
-    sloop(rainplayer0, rainglueplayer0, 576);
-  })
-
-  rainglueplayer.bind('timeupdate', function() {
-    sloop(rainglueplayer0, rainplayer0, 10);
-  })
+  function playall(){
+    playif(rainplayer0, rainglueplayer0);
+    playif(wavesplayer0, wavesglueplayer0);
+    playif(thunderplayer0, thunderglueplayer0);
+    playif(fireplayer0, fireglueplayer0);
+    playif(birdsplayer0, birdsglueplayer0);          
+    playif(humansplayer0, humansglueplayer0);
+  }
   
-  wavesplayer.bind('timeupdate', function() {
-    sloop(wavesplayer0, wavesglueplayer0, 255);
-  })
-
-  wavesglueplayer.bind('timeupdate', function() {
-    sloop(wavesglueplayer0, wavesplayer0, 10);
-  })
+  function pauseall(){
+    rainplayer0.pause();
+    rainglueplayer0.pause();
+    wavesplayer0.pause();
+    wavesglueplayer0.pause();
+    thunderplayer0.pause();
+    thunderglueplayer0.pause();
+    fireplayer0.pause();
+    fireglueplayer0.pause();
+    birdsplayer0.pause();
+    birdsglueplayer0.pause();          
+    humansplayer0.pause();
+    humansglueplayer0.pause();
+  }  
   
-  thunderplayer.bind('timeupdate', function() {
-    sloop(thunderplayer0, thunderglueplayer0, 488);
-  })
-
-  thunderglueplayer.bind('timeupdate', function() {
-    sloop(thunderglueplayer0, thunderplayer0, 10);
-  })
-  
-  fireplayer.bind('timeupdate', function() {
-    sloop(fireplayer0, fireglueplayer0, 250);
-  })
-
-  fireglueplayer.bind('timeupdate', function() {
-    sloop(fireglueplayer0, fireplayer0, 10);
-  })
-
-  birdsplayer.bind('timeupdate', function() {
-    sloop(birdsplayer0, birdsglueplayer0, 545);
-  })
-
-  birdsglueplayer.bind('timeupdate', function() {
-    sloop(birdsglueplayer0, birdsplayer0, 10);
-  })    
-  
-  humansplayer.bind('timeupdate', function() {
-    sloop(humansplayer0, humansglueplayer0, 321);
-  })
-
-  humansglueplayer.bind('timeupdate', function() {
-    sloop(humansglueplayer0, humansplayer0, 10);
-  })  
-
-// looping parameters for each sample
-
-var rainslider = $("#rain-slider");
-var wavesslider = $("#waves-slider");
-var thunderslider = $("#thunder-slider");
-var fireslider = $("#fire-slider");
-var birdsslider = $("#birds-slider");
-var humansslider = $("#humans-slider");
-
-var rainbackground = $("#rain-slider-background");
-var wavesbackground = $("#waves-slider-background");
-var thunderbackground = $("#thunder-slider-background");
-var firebackground = $("#fire-slider-background");
-var birdsbackground = $("#birds-slider-background");
-var humansbackground = $("#humans-slider-background");
+//play-all and pause-all function
 
   function slidervol(player, glueplayer, slider, sliderbackground) {
     player.volume = slider.val();
@@ -133,7 +114,7 @@ var humansbackground = $("#humans-slider-background");
       if(player.volume > 0.02 && $("#play-pause-button").hasClass('pause-all')) {
         player.play();
       }
-      if(player.volume > 0.02 && $("#play-pause-button").hasClass('pause-all') && player.currentTime <0.01) {
+      if(player.volume > 0.02 && $("#play-pause-button").hasClass('pause-all') && player.currentTime <0.01 && glueplayer.paused){
         glueplayer.currentTime = 12;
         glueplayer.play();      
       }
@@ -149,8 +130,6 @@ var humansbackground = $("#humans-slider-background");
   function remembervol(slider, lsvol) {
     localStorage.setItem(lsvol, slider.val());
   }
-
-  
   
 // function updates volume at load and when slider moves and sets localstorage
   
@@ -235,8 +214,70 @@ var humansbackground = $("#humans-slider-background");
   
 // parameters to update audio by slider
 
-var ppbutton = $("#play-pause-button");
-    
+  function sloop(player, otherPlayer, time) {
+    if (player.currentTime >= time && otherPlayer.paused && !player.paused){
+      otherPlayer.currentTime = 0;
+      otherPlayer.play();
+    }
+  }
+  
+// function to fake seamless looping
+
+  rainplayer.bind('timeupdate', function() {
+    sloop(rainplayer0, rainglueplayer0, 576);
+  })
+
+  rainglueplayer.bind('timeupdate', function() {
+    sloop(rainglueplayer0, rainplayer0, 10);
+  })
+  
+  wavesplayer.bind('timeupdate', function() {
+    sloop(wavesplayer0, wavesglueplayer0, 255);
+  })
+
+  wavesglueplayer.bind('timeupdate', function() {
+    sloop(wavesglueplayer0, wavesplayer0, 10);
+  })
+  
+  thunderplayer.bind('timeupdate', function() {
+    sloop(thunderplayer0, thunderglueplayer0, 488);
+  })
+
+  thunderglueplayer.bind('timeupdate', function() {
+    sloop(thunderglueplayer0, thunderplayer0, 10);
+  })
+  
+  fireplayer.bind('timeupdate', function() {
+    sloop(fireplayer0, fireglueplayer0, 250);
+  })
+
+  fireglueplayer.bind('timeupdate', function() {
+    sloop(fireglueplayer0, fireplayer0, 10);
+  })
+
+  birdsplayer.bind('timeupdate', function() {
+    sloop(birdsplayer0, birdsglueplayer0, 545);
+  })
+
+  birdsglueplayer.bind('timeupdate', function() {
+    sloop(birdsglueplayer0, birdsplayer0, 10);
+  })    
+  
+  humansplayer.bind('timeupdate', function() {
+    sloop(humansplayer0, humansglueplayer0, 321);
+  })
+
+  humansglueplayer.bind('timeupdate', function() {
+    sloop(humansglueplayer0, humansplayer0, 10);
+  })  
+
+// looping parameters for each sample
+
+$(window).load(function(){
+
+  $("#loading").css("display", "none"); 
+  $("#all-controls").css("display", "inline");
+
   ppbutton.click(function(){
       if($(this).hasClass('play-all')) {
         playall();               
@@ -247,43 +288,7 @@ var ppbutton = $("#play-pause-button");
         $(this).attr("class", "play-all");
       }
   })
-    
-  function playif(player, glueplayer){
-      if(player.volume > 0.02) {
-        player.play();     
-        if(player.currentTime < 0.01) {
-          glueplayer.currentTime = 12;
-          glueplayer.play();      
-        }
-      }
-        
-  }
-  
-  function playall(){
-    playif(rainplayer0, rainglueplayer0);
-    playif(wavesplayer0, wavesglueplayer0);
-    playif(thunderplayer0, thunderglueplayer0);
-    playif(fireplayer0, fireglueplayer0);
-    playif(birdsplayer0, birdsglueplayer0);          
-    playif(humansplayer0, humansglueplayer0);
-  }
-  
-  function pauseall(){
-    rainplayer0.pause();
-    rainglueplayer0.pause();
-    wavesplayer0.pause();
-    wavesglueplayer0.pause();
-    thunderplayer0.pause();
-    thunderglueplayer0.pause();
-    fireplayer0.pause();
-    fireglueplayer0.pause();
-    birdsplayer0.pause();
-    birdsglueplayer0.pause();          
-    humansplayer0.pause();
-    humansglueplayer0.pause();
-  }  
-  
-//play-all and pause-all function
+})
 
 })
 </script>
@@ -299,94 +304,6 @@ var ppbutton = $("#play-pause-button");
 <div id="image-preload">
 </div>
 
-<!-- Audio players without controls -->
-
-<div class="audioplayer">
-  <audio id="wavesplayer" loop preload="none">
-    <source src="audio/waves.fade.mp4" type="audio/mp4" />
-    <source src="audio/waves.fade.ogg" type="audio/ogg" />
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="wavesglueplayer">
-    <source src="audio/waves.glue.mp4" type="audio/mp4" />
-    <source src="audio/waves.glue.ogg" type="audio/ogg" />
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="rainplayer" loop preload="none">
-    <source src="audio/rain.fade.mp4" type="audio/mp4">
-    <source src="audio/rain.fade.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="rainglueplayer">
-    <source src="audio/rain.glue.mp4" type="audio/mp4">
-    <source src="audio/rain.glue.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="thunderplayer" loop preload="none">
-    <source src="audio/thunder.fade.mp4" type="audio/mp4">
-    <source src="audio/thunder.fade.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="thunderglueplayer">
-    <source src="audio/thunder.glue.mp4" type="audio/mp4">
-    <source src="audio/thunder.glue.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="fireplayer" loop preload="none">
-    <source src="audio/fire.fade.mp4" type="audio/mp4">
-    <source src="audio/fire.fade.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="fireglueplayer">
-    <source src="audio/fire.glue.mp4" type="audio/mp4">
-    <source src="audio/fire.glue.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="birdsplayer" loop preload="none">
-    <source src="audio/birds.fade.mp4" type="audio/mp4">
-    <source src="audio/birds.fade.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="birdsglueplayer">
-    <source src="audio/birds.glue.mp4" type="audio/mp4">
-    <source src="audio/birds.glue.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="humansplayer" loop preload="none">
-    <source src="audio/humans.fade.mp4" type="audio/mp4">
-    <source src="audio/humans.fade.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<div class="audioplayer">
-  <audio id="humansglueplayer">
-    <source src="audio/humans.glue.mp4" type="audio/mp4">
-    <source src="audio/humans.glue.ogg" type="audio/ogg">
-  </audio>
-</div>
-
-<!-- end audio players -->
-
 <div id="site-title">
   <h1>A SOFT MURMUR</h1>
 </div>
@@ -401,6 +318,9 @@ var ppbutton = $("#play-pause-button");
       <div id="play-pause-button" class="play-all"></div>
     </a>
   </div>
+</div>
+<div id="loading">
+  <p>Loading...</p>
 </div>
 
 <div id="sliders-container">
@@ -458,6 +378,94 @@ var ppbutton = $("#play-pause-button");
 <div id="footer">
   <p><a href="info.html" data-ajax="false" target="_blank">About<a></p>
 </div>
+
+<!-- Audio players without controls -->
+
+<div class="audioplayer">
+  <audio id="wavesplayer" loop preload="none">
+    <source src="audio/waves.fade.mp4" type="audio/mp4" />
+    <source src="audio/waves.fade.ogg" type="audio/ogg" />
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="wavesglueplayer" preload="auto">
+    <source src="audio/waves.glue.mp4" type="audio/mp4" />
+    <source src="audio/waves.glue.ogg" type="audio/ogg" />
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="rainplayer" loop preload="none">
+    <source src="audio/rain.fade.mp4" type="audio/mp4">
+    <source src="audio/rain.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="rainglueplayer" preload="auto">
+    <source src="audio/rain.glue.mp4" type="audio/mp4">
+    <source src="audio/rain.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="thunderplayer" loop preload="none">
+    <source src="audio/thunder.fade.mp4" type="audio/mp4">
+    <source src="audio/thunder.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="thunderglueplayer" preload="auto">
+    <source src="audio/thunder.glue.mp4" type="audio/mp4">
+    <source src="audio/thunder.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="fireplayer" loop preload="none">
+    <source src="audio/fire.fade.mp4" type="audio/mp4">
+    <source src="audio/fire.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="fireglueplayer" preload="auto">
+    <source src="audio/fire.glue.mp4" type="audio/mp4">
+    <source src="audio/fire.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="birdsplayer" loop preload="none">
+    <source src="audio/birds.fade.mp4" type="audio/mp4">
+    <source src="audio/birds.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="birdsglueplayer" preload="auto">
+    <source src="audio/birds.glue.mp4" type="audio/mp4">
+    <source src="audio/birds.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="humansplayer" loop preload="none">
+    <source src="audio/humans.fade.mp4" type="audio/mp4">
+    <source src="audio/humans.fade.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<div class="audioplayer">
+  <audio id="humansglueplayer" preload="auto">
+    <source src="audio/humans.glue.mp4" type="audio/mp4">
+    <source src="audio/humans.glue.ogg" type="audio/ogg">
+  </audio>
+</div>
+
+<!-- end audio players -->
 
 </div>
 </body>
