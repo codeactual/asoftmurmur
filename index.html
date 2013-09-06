@@ -133,6 +133,11 @@ var humansbackground = $("#humans-slider-background");
       if(player.volume > 0.02 && $("#play-pause-button").hasClass('pause-all')) {
         player.play();
       }
+      if(player.volume > 0.02 && $("#play-pause-button").hasClass('pause-all') && player.currentTime <0.01) {
+        glueplayer.currentTime = 12;
+        glueplayer.play();      
+      }
+// this plays half of glueplayer while the main audio element loads      
       if(player.volume <= 0.02) {
         player.pause();
       }
@@ -242,20 +247,25 @@ var ppbutton = $("#play-pause-button");
         $(this).attr("class", "play-all");
       }
   })
-  
-  function playif(player){
+    
+  function playif(player, glueplayer){
       if(player.volume > 0.02) {
-        player.play();
+        player.play();     
+        if(player.currentTime < 0.01) {
+          glueplayer.currentTime = 12;
+          glueplayer.play();      
+        }
       }
+        
   }
   
   function playall(){
-    playif(rainplayer0);
-    playif(wavesplayer0);
-    playif(thunderplayer0);
-    playif(fireplayer0);
-    playif(birdsplayer0);          
-    playif(humansplayer0);
+    playif(rainplayer0, rainglueplayer0);
+    playif(wavesplayer0, wavesglueplayer0);
+    playif(thunderplayer0, thunderglueplayer0);
+    playif(fireplayer0, fireglueplayer0);
+    playif(birdsplayer0, birdsglueplayer0);          
+    playif(humansplayer0, humansglueplayer0);
   }
   
   function pauseall(){
@@ -286,6 +296,8 @@ var ppbutton = $("#play-pause-button");
   <span id="facebook"><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://asoftmurmur.com&p[images][0]=&p[title]=A%20Soft%20Murmur&p[summary]=Relaxing%20ambient%20background%20noise" target="_blank">Facebook</a></span><span id="twitter"><a href="http://twitter.com/home?status=I'm%20enjoying%20relaxing%20ambient%20background%20noise%20from%20asoftmurmur.com%20@asoftmurmur" target="_blank">Twitter</a></span><span id="googleplus"><a href="https://plus.google.com/share?url=http://asoftmurmur.com" target="_blank">Google+</a></span>
 </div>
 
+<div id="image-preload">
+</div>
 
 <!-- Audio players without controls -->
 
@@ -297,7 +309,7 @@ var ppbutton = $("#play-pause-button");
 </div>
 
 <div class="audioplayer">
-  <audio id="wavesglueplayer" preload="none">
+  <audio id="wavesglueplayer">
     <source src="audio/waves.glue.mp4" type="audio/mp4" />
     <source src="audio/waves.glue.ogg" type="audio/ogg" />
   </audio>
@@ -311,7 +323,7 @@ var ppbutton = $("#play-pause-button");
 </div>
 
 <div class="audioplayer">
-  <audio id="rainglueplayer" preload="none">
+  <audio id="rainglueplayer">
     <source src="audio/rain.glue.mp4" type="audio/mp4">
     <source src="audio/rain.glue.ogg" type="audio/ogg">
   </audio>
@@ -325,7 +337,7 @@ var ppbutton = $("#play-pause-button");
 </div>
 
 <div class="audioplayer">
-  <audio id="thunderglueplayer" preload="none">
+  <audio id="thunderglueplayer">
     <source src="audio/thunder.glue.mp4" type="audio/mp4">
     <source src="audio/thunder.glue.ogg" type="audio/ogg">
   </audio>
@@ -339,7 +351,7 @@ var ppbutton = $("#play-pause-button");
 </div>
 
 <div class="audioplayer">
-  <audio id="fireglueplayer" preload="none">
+  <audio id="fireglueplayer">
     <source src="audio/fire.glue.mp4" type="audio/mp4">
     <source src="audio/fire.glue.ogg" type="audio/ogg">
   </audio>
@@ -353,7 +365,7 @@ var ppbutton = $("#play-pause-button");
 </div>
 
 <div class="audioplayer">
-  <audio id="birdsglueplayer" preload="none">
+  <audio id="birdsglueplayer">
     <source src="audio/birds.glue.mp4" type="audio/mp4">
     <source src="audio/birds.glue.ogg" type="audio/ogg">
   </audio>
@@ -367,7 +379,7 @@ var ppbutton = $("#play-pause-button");
 </div>
 
 <div class="audioplayer">
-  <audio id="humansglueplayer" preload="none">
+  <audio id="humansglueplayer">
     <source src="audio/humans.glue.mp4" type="audio/mp4">
     <source src="audio/humans.glue.ogg" type="audio/ogg">
   </audio>
@@ -441,9 +453,6 @@ var ppbutton = $("#play-pause-button");
   </div>
 </div>
 
-</div>
-
-<div id="image-preload">
 </div>
 
 <div id="footer">
