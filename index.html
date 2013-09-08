@@ -74,7 +74,7 @@ var ppbutton = $("#play-pause-button");
       if(player.volume > 0.02) {
         player.play();     
         if(player.currentTime < 0.01) {
-          glueplayer.currentTime = 12;
+          glueplayer.currentTime = 7;
           glueplayer.play();      
         }
       }
@@ -115,7 +115,7 @@ var ppbutton = $("#play-pause-button");
         player.play();
       }
       if(player.volume > 0.02 && $("#play-pause-button").hasClass('pause-all') && player.currentTime <0.01 && glueplayer.paused){
-        glueplayer.currentTime = 12;
+        glueplayer.currentTime = 7;
         glueplayer.play();      
       }
 // this plays half of glueplayer while the main audio element loads      
@@ -224,51 +224,51 @@ var ppbutton = $("#play-pause-button");
 // function to fake seamless looping
 
   rainplayer.bind('timeupdate', function() {
-    sloop(rainplayer0, rainglueplayer0, 576);
+    sloop(rainplayer0, rainglueplayer0, 294);
   })
 
   rainglueplayer.bind('timeupdate', function() {
-    sloop(rainglueplayer0, rainplayer0, 10);
+    sloop(rainglueplayer0, rainplayer0, 5);
   })
   
   wavesplayer.bind('timeupdate', function() {
-    sloop(wavesplayer0, wavesglueplayer0, 255);
+    sloop(wavesplayer0, wavesglueplayer0, 234);
   })
 
   wavesglueplayer.bind('timeupdate', function() {
-    sloop(wavesglueplayer0, wavesplayer0, 10);
+    sloop(wavesglueplayer0, wavesplayer0, 5);
   })
   
   thunderplayer.bind('timeupdate', function() {
-    sloop(thunderplayer0, thunderglueplayer0, 488);
+    sloop(thunderplayer0, thunderglueplayer0, 294);
   })
 
   thunderglueplayer.bind('timeupdate', function() {
-    sloop(thunderglueplayer0, thunderplayer0, 10);
+    sloop(thunderglueplayer0, thunderplayer0, 5);
   })
   
   fireplayer.bind('timeupdate', function() {
-    sloop(fireplayer0, fireglueplayer0, 250);
+    sloop(fireplayer0, fireglueplayer0, 234);
   })
 
   fireglueplayer.bind('timeupdate', function() {
-    sloop(fireglueplayer0, fireplayer0, 10);
+    sloop(fireglueplayer0, fireplayer0, 5);
   })
 
   birdsplayer.bind('timeupdate', function() {
-    sloop(birdsplayer0, birdsglueplayer0, 545);
+    sloop(birdsplayer0, birdsglueplayer0, 294);
   })
 
   birdsglueplayer.bind('timeupdate', function() {
-    sloop(birdsglueplayer0, birdsplayer0, 10);
+    sloop(birdsglueplayer0, birdsplayer0, 5);
   })    
   
   humansplayer.bind('timeupdate', function() {
-    sloop(humansplayer0, humansglueplayer0, 321);
+    sloop(humansplayer0, humansglueplayer0, 141);
   })
 
   humansglueplayer.bind('timeupdate', function() {
-    sloop(humansglueplayer0, humansplayer0, 10);
+    sloop(humansglueplayer0, humansplayer0, 5);
   })  
 
 // looping parameters for each sample
