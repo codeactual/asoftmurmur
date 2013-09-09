@@ -23,8 +23,22 @@
   height: 8em;
 }
 
-#image-preload {
+#image-preload-1 {
   background-image: url('img/pause.button.png');
+  background-size: cover;
+  width: 1px;
+  height: 1px;
+  opacity: 0.01;
+  float: left;
+}
+
+#image-preload-2 {
+  background-image: url('img/play.button.png');
+  background-size: cover;
+  width: 1px;
+  height: 1px;
+  opacity: 0.01;
+  float: right;
 }
 
 .sliders .ui-slider-track {
