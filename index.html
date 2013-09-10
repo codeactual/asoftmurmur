@@ -67,6 +67,12 @@ var birdsglueplayer = $('#birdsglueplayer');
 var humansplayer = $('#humansplayer');
 var humansglueplayer = $('#humansglueplayer');
 
+var reset = $('#reset');
+var silence = $('#silence');
+var tpbutton = $('#timedpausebutton');
+var canceltp = $('#canceltp');
+var pauseminutesinput = $('#minutestillpause');
+
 
 var ppbutton = $("#play-pause-button");
     
@@ -277,6 +283,75 @@ $('label').on('click', false);
 
 // prevent tap bringing up input dialogue on mobile devices
 
+  $(".optionshidden").hide();
+  $(".show_hide").show();
+ 
+  $('.show_hide').click(function(){
+    $(".optionshidden").slideToggle();
+  });
+
+
+// function to show and hide options menu
+
+function resetall(slider, volume) {
+   slider.val(volume);
+   slider.slider("refresh");
+}
+
+reset.click(function(){
+  resetall(rainslider, 0.3);
+  resetall(thunderslider, 0.8);
+  resetall(fireslider, 0.4);  
+  resetall(wavesslider, 0);
+  resetall(birdsslider, 0);  
+  resetall(humansslider, 0);
+})
+
+// reset: resets volume to defaults
+
+function silenceall(slider) {
+    slider.val(0);
+    slider.slider("refresh");
+}
+
+silence.click(function(){
+  silenceall(rainslider);
+  silenceall(thunderslider);
+  silenceall(fireslider);  
+  silenceall(wavesslider);
+  silenceall(birdsslider);  
+  silenceall(humansslider);
+})
+    
+// silence: sets all sliders to 0
+
+
+
+tpbutton.click(function(){
+ var pauseminutes = $("input#minutestillpause").val();
+ var pausems = pauseminutes * 60000;
+ 
+ if(ppbutton.hasClass('play-all')) {
+     playall();               
+     ppbutton.attr("class", "pause-all");
+  }
+ 
+ var pausetimeout = setTimeout(function(){timedpausefunction()},pausems);
+ 
+ function timedpausefunction(){
+  pauseall();
+  ppbutton.attr("class", "play-all");
+ }
+ 
+ canceltp.click(function(){
+ clearTimeout(pausetimeout);
+ })
+
+})
+
+
+// timed pause: pauses after x minutes
+
 $(window).load(function(){
 
   $("#loading").css("display", "none"); 
@@ -317,7 +392,7 @@ $(window).load(function(){
   <h1>A SOFT MURMUR</h1>
 </div>
 
-<div id="intro-text">
+<div id="intro-text" class="dtext">
   <p>Ambient sounds to wash away distraction.</p>
 </div>
 
@@ -328,8 +403,27 @@ $(window).load(function(){
     </a>
   </div>
 </div>
-<div id="loading">
+<div id="loading" class="dtext">
   <p>Loading...</p>
+</div>
+
+<div id="options" class="dtext">
+  <p><a href="#" class="show_hide">Options</a></p>
+  <div class="optionshidden">
+    <div id="optionsleft">
+        <a href="#" id="reset">Reset</a>
+    </div>
+    <div id="optionsright">
+        <a href="#" id="silence">Silence</a>
+    </div>
+    <div id="timedpausepre">
+    <p>Pause after <input type="text" id="minutestillpause" value="10" size ="1" data-role="none" /> minutes. <a href="#" id="timedpausebutton">Go</a></p>
+    </div>
+    <div id="timedpausepost">
+    <p>Sounds will pause in <span id="timedpauseminutesleft"></span> minutes. <a href="#" id="canceltp">Cancel</a></p>
+    </div>
+  <a href="#" class="show_hide">Hide</a>
+  </div>
 </div>
 
 <div id="sliders-container">

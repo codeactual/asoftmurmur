@@ -122,8 +122,7 @@ html {
   100% { color:black; }
 }
 
-#loading,
-#intro-text {
+.dtext {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 1em;
@@ -132,6 +131,10 @@ html {
   color: #000;
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.dtext a {
+  color: #000;
 }
 
 #share-buttons,
@@ -319,8 +322,7 @@ html {
     font-size: 1.3em;
   }
   
-  #loading,
-  #intro-text {
+  .dtext {
     font-size: 0.8em;
   }
   
@@ -345,8 +347,7 @@ html {
     font-size: 1em;
   }
   
-  #loading,
-  #intro-text {
+  .dtext {
     font-size: 0.8em;
   }
   
@@ -393,4 +394,38 @@ html {
   font-family: Helvetica;
   max-width: 40em;
   margin: 0 auto 0 auto;
+}
+
+/* Style for show and hide options menu */
+
+.optionshidden {
+    height: 100%;
+    margin: 10px 0 10px 0;
+}
+ 
+.show_hide {
+    display:none;
+}
+
+.optionshidden #optionsleft a,
+.optionshidden #optionsright a,
+#timedpause a {
+  text-decoration: none;
+  border: 2px solid #000;
+  padding: 2px 10px 2px 10px;
+}
+
+#optionsleft,
+#optionsright {
+  width: 50%;
+  height: 100%;
+  margin-bottom: 15px;
+}
+
+#optionsleft {
+  float:left;
+}
+
+#optionsright {
+  float:right;
 }
