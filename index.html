@@ -422,11 +422,22 @@ tfbutton.click(function(){
   var fadesecs = fadems / 1000;
   var fadestarttime = mstotime(fadems);
   
+  var rainval = rainslider.val();
   var rainco = rainslider.val() / fadesecs;
+  
+  var thunderval = thunderslider.val();  
   var thunderco = thunderslider.val() / fadesecs;
+  
+  var fireval = fireslider.val();
   var fireco = fireslider.val() / fadesecs;
+
+  var wavesval = wavesslider.val();
   var wavesco = wavesslider.val() / fadesecs;
+
+  var birdsval = birdsslider.val();
   var birdsco = birdsslider.val() / fadesecs;
+
+  var humansval = humansslider.val();
   var humansco = humansslider.val() / fadesecs;
  
   timedpausepre.css("display", "none");
@@ -442,28 +453,34 @@ tfbutton.click(function(){
   var fadetimeout = setInterval(function(){timedfadefunction()},1000);
   
   function timedfadefunction(){
+  
     fadems = fadems - 1000;
     var fadetimeleft = mstotime(fadems);
     $("#timedfademinutesleft").text(fadetimeleft);
     
-    var tmprainvol = rainslider.val() - rainco;
-    rainslider.val(tmprainvol);
+    rainval = rainval - rainco;
+    rainslider.val(rainval);
     rainslider.slider("refresh");
     
-    thunderslider.val(thunderslider.val - thunderco); 
+    thunderval = thunderval - thunderco;
+    thunderslider.val(thunderval);
     thunderslider.slider("refresh");
     
-    fireslider.val(fireslider.val - fireco);
+    fireval = fireval - fireco;
+    fireslider.val(fireval);
     fireslider.slider("refresh");
     
-    wavesslider.val(wavesslider.val - wavesco);
+    wavesval = wavesval - wavesco;
+    wavesslider.val(wavesval);
     wavesslider.slider("refresh");
     
-    birdsslider.val(birdsslider.val - birdsco);
+    birdsval = birdsval - birdsco;
+    birdsslider.val(birdsval);
     birdsslider.slider("refresh");
     
-    humansslider.val(humansslider.val - humansco); 
-    humansslider.slider("refresh");  
+    humansval = humansval - humansco;
+    humansslider.val(humansval);
+    humansslider.slider("refresh"); 
     
     if (fadems <= 0){
       clearInterval(fadetimeout);
@@ -549,7 +566,7 @@ $(window).load(function(){
         <a href="#" id="silence">Silence</a>
     </div>
     <div id="timedpausepre" class="linkbuttons">
-    <p>Pause after <input type="text" id="minutestillpause" value="10" size ="1" data-role="none" /> minutes. <a href="#" id="timedpausebutton">Go</a></p>
+    <p>Pause after <input type="text" id="minutestillpause" value="10" size ="1"data-role="none" /> minutes. <a href="#" id="timedpausebutton">Go</a></p>
     </div>
     <div id="timedpausepost" class="linkbuttons">
     <p>Sounds will pause in <span id="timedpauseminutesleft"></span>.</p><p> <a href="#" id="canceltp">Cancel</a></p>
@@ -571,7 +588,7 @@ $(window).load(function(){
   <div id="rain-slider-background" class="slider-background"></div>
   <div id="rain-slider-container-inner" class="slider-inner">
     <div class="labelfix"> <label for="rain-slider">Rain</label> </div>
-      <input type="range" id="rain-slider" value="0.3" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+      <input type="range" id="rain-slider" value="0.3" min="0" max="1" step="0.01" class="ui-hidden-accessible"/>
   </div>
 </div>
 
@@ -579,7 +596,7 @@ $(window).load(function(){
   <div id="thunder-slider-background" class="slider-background"></div>
   <div id="thunder-slider-container-inner" class="slider-inner">
     <div class="labelfix"> <label for="thunder-slider">Thunder</label> </div>
-      <input type="range" id="thunder-slider" value="0.8" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+      <input type="range" id="thunder-slider" value="0.8" min="0" max="1" step="0.01" class="ui-hidden-accessible"/>
   </div>
 </div>
 
@@ -587,7 +604,7 @@ $(window).load(function(){
   <div id="fire-slider-background" class="slider-background"></div>
   <div id="fire-slider-container-inner" class="slider-inner">
     <div class="labelfix"> <label for="fire-slider">Fire</label> </div>
-      <input type="range" id="fire-slider" value="0.4" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+      <input type="range" id="fire-slider" value="0.4" min="0" max="1" step="0.01" class="ui-hidden-accessible"/>
   </div>
 </div>
 
@@ -595,7 +612,7 @@ $(window).load(function(){
   <div id="waves-slider-background" class="slider-background"></div>
   <div id="waves-slider-container-inner" class="slider-inner">
     <div class="labelfix"> <label for="waves-slider">Waves</label> </div>
-      <input type="range" id="waves-slider" value="0.0" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+      <input type="range" id="waves-slider" value="0.0" min="0" max="1" step="0.01" class="ui-hidden-accessible"/>
   </div>
 </div>
 
@@ -603,7 +620,7 @@ $(window).load(function(){
   <div id="birds-slider-background" class="slider-background"></div>
   <div id="birds-slider-container-inner" class="slider-inner">
     <div class="labelfix"> <label for="birds-slider">Birds</label> </div>
-      <input type="range" id="birds-slider" value="0.0" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+      <input type="range" id="birds-slider" value="0.0" min="0" max="1" step="0.01" class="ui-hidden-accessible"/>
   </div>
 </div>
 
@@ -611,7 +628,7 @@ $(window).load(function(){
   <div id="humans-slider-background" class="slider-background"></div>
   <div id="humans-slider-container-inner" class="slider-inner">
     <div class="labelfix"> <label for="humans-slider">Humans</label> </div>
-      <input type="range" id="humans-slider" value="0.0" min="0" max="1" step="0.001" class="ui-hidden-accessible"/>
+      <input type="range" id="humans-slider" value="0.0" min="0" max="1" step="0.01" class="ui-hidden-accessible"/>
   </div>
 </div>
 
