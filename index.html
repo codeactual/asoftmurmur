@@ -69,10 +69,18 @@ var humansglueplayer = $('#humansglueplayer');
 
 var reset = $('#reset');
 var silence = $('#silence');
+
+var timedpausepre = $('#timedpausepre');
+var timedpausepost = $('#timedpausepost');
 var tpbutton = $('#timedpausebutton');
 var canceltp = $('#canceltp');
 var pauseminutesinput = $('#minutestillpause');
 
+var timedfadepre = $('#timedfadepre');
+var timedfadepost = $('#timedfadepost');
+var tfbutton = $('#timedfadebutton');
+var canceltf = $('#canceltf');
+var fademinutesinput = $('#minutestillfade');
 
 var ppbutton = $("#play-pause-button");
     
@@ -122,9 +130,8 @@ var ppbutton = $("#play-pause-button");
       }
       if(player.volume > 0.02 && $("#play-pause-button").hasClass('pause-all') && player.currentTime <0.01 && glueplayer.paused){
         glueplayer.currentTime = 7;
-        glueplayer.play();      
+        glueplayer.play(); // play half of glueplayer while the main audio element loads          
       }
-// this plays half of glueplayer while the main audio element loads      
       if(player.volume <= 0.02) {
         player.pause();
       }
@@ -325,32 +332,157 @@ silence.click(function(){
     
 // silence: sets all sliders to 0
 
+  function mstotime(inputms) {
+    var ms = inputms % 1000;
+    inputms = (inputms - ms) / 1000;
+    var secs = inputms % 60;
+    inputms = (inputms - secs) / 60;
+    var mins = inputms % 60;
+    var hrs = (inputms - mins) / 60;
+    
+    
+    if (hrs>1){
+      return hrs + ' hours, ' + mins + ' minutes and ' + secs + ' seconds';
+    }
+    
+    if (hrs==1){
+      return hrs + ' hour, ' + mins + ' minutes and ' + secs + ' seconds';
+    }    
+    
+    if (hrs<1){
+      if (mins>1){
+        return mins + ' minutes and ' + secs + ' seconds';
+      }
+      if (mins==1){
+        return mins + ' minute and ' + secs + ' seconds';
+      }
+      if (mins<1){
+        return secs + ' seconds';
+      }
+    }
 
+  }
+
+// convert ms to time for functions below
 
 tpbutton.click(function(){
- var pauseminutes = $("input#minutestillpause").val();
- var pausems = pauseminutes * 60000;
+
+  var pauseminutes = $("input#minutestillpause").val();
+  var pausems = pauseminutes * 60000;
+  var starttime = mstotime(pausems);
+ 
+  timedpausepre.css("display", "none");
+  timedfadepre.css("display", "none");
+  $("#timedpauseminutesleft").text(starttime); // set the start time for the first second
+  timedpausepost.css("display", "inline");
  
  if(ppbutton.hasClass('play-all')) {
      playall();               
      ppbutton.attr("class", "pause-all");
   }
  
- var pausetimeout = setTimeout(function(){timedpausefunction()},pausems);
+  var pausetimeout = setTimeout(function(){timedpausefunction()},pausems);
  
- function timedpausefunction(){
-  pauseall();
-  ppbutton.attr("class", "play-all");
+  function timedpausefunction(){
+    pauseall();
+    ppbutton.attr("class", "play-all");
+    timedpausepre.css("display", "inline");
+    timedpausepost.css("display", "none");
+    timedfadepre.css("display", "inline");
  }
- 
+  
+  var timeupdate = setInterval(function(){timerupdate()},1000);
+  
+  function timerupdate(){
+    pausems = pausems - 1000;
+    var timeleft = mstotime(pausems);
+    $("#timedpauseminutesleft").text(timeleft);
+      if (pausems <= 0){
+        clearInterval(timeupdate);
+      }
+  }
+  
  canceltp.click(function(){
- clearTimeout(pausetimeout);
+  clearTimeout(pausetimeout);
+  clearInterval(timeupdate);
+  timedpausepre.css("display", "inline");
+  timedpausepost.css("display", "none");
+  timedfadepre.css("display", "inline");
  })
 
 })
 
 
 // timed pause: pauses after x minutes
+
+tfbutton.click(function(){
+
+  var fademinutes = $("input#minutestillfade").val();
+  var fadems = fademinutes * 60000;
+  var fadesecs = fadems / 1000;
+  var fadestarttime = mstotime(fadems);
+  
+  var rainco = rainslider.val() / fadesecs;
+  var thunderco = thunderslider.val() / fadesecs;
+  var fireco = fireslider.val() / fadesecs;
+  var wavesco = wavesslider.val() / fadesecs;
+  var birdsco = birdsslider.val() / fadesecs;
+  var humansco = humansslider.val() / fadesecs;
+ 
+  timedpausepre.css("display", "none");
+  timedfadepre.css("display", "none");
+  $("#timedfademinutesleft").text(fadestarttime); // set the start time for the first second
+  timedfadepost.css("display", "inline");
+ 
+ if(ppbutton.hasClass('play-all')) {
+     playall();               
+     ppbutton.attr("class", "pause-all");
+  }
+  
+  var fadetimeout = setInterval(function(){timedfadefunction()},1000);
+  
+  function timedfadefunction(){
+    fadems = fadems - 1000;
+    var fadetimeleft = mstotime(fadems);
+    $("#timedfademinutesleft").text(fadetimeleft);
+    
+    var tmprainvol = rainslider.val() - rainco;
+    rainslider.val(tmprainvol);
+    rainslider.slider("refresh");
+    
+    thunderslider.val(thunderslider.val - thunderco); 
+    thunderslider.slider("refresh");
+    
+    fireslider.val(fireslider.val - fireco);
+    fireslider.slider("refresh");
+    
+    wavesslider.val(wavesslider.val - wavesco);
+    wavesslider.slider("refresh");
+    
+    birdsslider.val(birdsslider.val - birdsco);
+    birdsslider.slider("refresh");
+    
+    humansslider.val(humansslider.val - humansco); 
+    humansslider.slider("refresh");  
+    
+    if (fadems <= 0){
+      clearInterval(fadetimeout);
+      timedpausepre.css("display", "inline");
+      timedfadepre.css("display", "inline");
+      timedfadepost.css("display", "none");
+    }
+  }
+  
+  canceltf.click(function(){
+  clearInterval(fadetimeout);
+  timedpausepre.css("display", "inline");
+  timedfadepost.css("display", "none");
+  timedfadepre.css("display", "inline");
+  })
+      
+})
+
+// timed fade: fade all to silence over x minutes
 
 $(window).load(function(){
 
@@ -385,7 +517,7 @@ $(window).load(function(){
 <div id="page-container">
 
 <div id="share-buttons">
-  <span id="facebook"><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://asoftmurmur.com&p[images][0]=&p[title]=A%20Soft%20Murmur&p[summary]=Relaxing%20ambient%20background%20noise" target="_blank">Facebook</a></span><span id="twitter"><a href="http://twitter.com/home?status=I'm%20enjoying%20relaxing%20ambient%20background%20noise%20from%20asoftmurmur.com%20@asoftmurmur" target="_blank">Twitter</a></span><span id="googleplus"><a href="https://plus.google.com/share?url=http://asoftmurmur.com" target="_blank">Google+</a></span>
+  <span id="facebook"><a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://asoftmurmur.com&amp;p[images][0]=&amp;p[title]=A%20Soft%20Murmur&amp;p[summary]=Relaxing%20ambient%20background%20noise" target="_blank">Facebook</a></span><span id="twitter"><a href="http://twitter.com/home?status=I'm%20enjoying%20relaxing%20ambient%20background%20noise%20from%20asoftmurmur.com%20@asoftmurmur" target="_blank">Twitter</a></span><span id="googleplus"><a href="https://plus.google.com/share?url=http://asoftmurmur.com" target="_blank">Google+</a></span>
 </div>
 
 <div id="site-title">
@@ -410,17 +542,24 @@ $(window).load(function(){
 <div id="options" class="dtext">
   <p><a href="#" class="show_hide">Options</a></p>
   <div class="optionshidden">
-    <div id="optionsleft">
-        <a href="#" id="reset">Reset</a>
+    <div id="optionsleft" class="linkbuttons">
+        <a href="#" id="reset">Reset volume</a>
     </div>
-    <div id="optionsright">
+    <div id="optionsright" class="linkbuttons">
         <a href="#" id="silence">Silence</a>
     </div>
-    <div id="timedpausepre">
+    <div id="timedpausepre" class="linkbuttons">
     <p>Pause after <input type="text" id="minutestillpause" value="10" size ="1" data-role="none" /> minutes. <a href="#" id="timedpausebutton">Go</a></p>
     </div>
-    <div id="timedpausepost">
-    <p>Sounds will pause in <span id="timedpauseminutesleft"></span> minutes. <a href="#" id="canceltp">Cancel</a></p>
+    <div id="timedpausepost" class="linkbuttons">
+    <p>Sounds will pause in <span id="timedpauseminutesleft"></span>.</p><p> <a href="#" id="canceltp">Cancel</a></p>
+    </div>
+    
+    <div id="timedfadepre" class="linkbuttons">
+    <p>Fade to silence over <input type="text" id="minutestillfade" value="10" size ="1" data-role="none" /> minutes. <a href="#" id="timedfadebutton">Go</a></p>
+    </div>
+    <div id="timedfadepost" class="linkbuttons">
+    <p>Sounds will fade to silence in <span id="timedfademinutesleft"></span>.</p><p> <a href="#" id="canceltf">Cancel</a></p>
     </div>
   <a href="#" class="show_hide">Hide</a>
   </div>

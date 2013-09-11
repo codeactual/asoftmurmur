@@ -407,9 +407,7 @@ html {
     display:none;
 }
 
-.optionshidden #optionsleft a,
-.optionshidden #optionsright a,
-#timedpause a {
+.linkbuttons a {
   text-decoration: none;
   border: 2px solid #000;
   padding: 2px 10px 2px 10px;
@@ -428,4 +426,9 @@ html {
 
 #optionsright {
   float:right;
+}
+
+#timedpausepost,
+#timedfadepost {
+  display:none;
 }
