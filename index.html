@@ -70,6 +70,7 @@ var humansglueplayer = $('#humansglueplayer');
 var reset = $('#reset');
 var silence = $('#silence');
 
+var buttonoptions = $('#buttonoptions');
 var timedpausepre = $('#timedpausepre');
 var timedpausepost = $('#timedpausepost');
 var tpbutton = $('#timedpausebutton');
@@ -373,6 +374,7 @@ tpbutton.click(function(){
  
   timedpausepre.css("display", "none");
   timedfadepre.css("display", "none");
+  buttonoptions.css("display", "none");
   $("#timedpauseminutesleft").text(starttime); // set the start time for the first second
   timedpausepost.css("display", "inline");
  
@@ -389,6 +391,7 @@ tpbutton.click(function(){
     timedpausepre.css("display", "inline");
     timedpausepost.css("display", "none");
     timedfadepre.css("display", "inline");
+    buttonoptions.css ("display", "inline");
  }
   
   var timeupdate = setInterval(function(){timerupdate()},1000);
@@ -408,6 +411,7 @@ tpbutton.click(function(){
   timedpausepre.css("display", "inline");
   timedpausepost.css("display", "none");
   timedfadepre.css("display", "inline");
+  buttonoptions.css("display", "inline");
  })
 
 })
@@ -442,6 +446,7 @@ tfbutton.click(function(){
  
   timedpausepre.css("display", "none");
   timedfadepre.css("display", "none");
+  buttonoptions.css("display", "none");
   $("#timedfademinutesleft").text(fadestarttime); // set the start time for the first second
   timedfadepost.css("display", "inline");
  
@@ -486,6 +491,7 @@ tfbutton.click(function(){
       clearInterval(fadetimeout);
       timedpausepre.css("display", "inline");
       timedfadepre.css("display", "inline");
+      buttonoptions.css("display", "inline");
       timedfadepost.css("display", "none");
     }
   }
@@ -495,6 +501,7 @@ tfbutton.click(function(){
   timedpausepre.css("display", "inline");
   timedfadepost.css("display", "none");
   timedfadepre.css("display", "inline");
+  buttonoptions.css("display", "inline");
   })
       
 })
@@ -559,26 +566,27 @@ $(window).load(function(){
 <div id="options" class="dtext">
   <p><a href="#" class="show_hide">Options</a></p>
   <div class="optionshidden">
-    <div id="optionsleft" class="linkbuttons">
-        <a href="#" id="reset">Reset volume</a>
-    </div>
-    <div id="optionsright" class="linkbuttons">
-        <a href="#" id="silence">Silence</a>
-    </div>
+  <div id="optionscontainer">
+  <div id ="buttonoptions" class="linkbuttons">
+        <p>Reset volume levels to default: <a href="#" id="reset">Go</a></p>
+        <p>Set all sounds to silent: <a href="#" id="silence">Go</a></p>
+  </div>
     <div id="timedpausepre" class="linkbuttons">
-    <p>Pause after <input type="text" id="minutestillpause" value="10" size ="1"data-role="none" /> minutes. <a href="#" id="timedpausebutton">Go</a></p>
+    <p>Pause after <input type="text" id="minutestillpause" value="10" size ="1"data-role="none" /> minutes: <a href="#" id="timedpausebutton">Go</a></p>
     </div>
     <div id="timedpausepost" class="linkbuttons">
     <p>Sounds will pause in <span id="timedpauseminutesleft"></span>.</p><p> <a href="#" id="canceltp">Cancel</a></p>
     </div>
     
     <div id="timedfadepre" class="linkbuttons">
-    <p>Fade to silence over <input type="text" id="minutestillfade" value="10" size ="1" data-role="none" /> minutes. <a href="#" id="timedfadebutton">Go</a></p>
+    <p>Fade to silence over <input type="text" id="minutestillfade" value="10" size ="1" data-role="none" /> minutes: <a href="#" id="timedfadebutton">Go</a></p>
     </div>
     <div id="timedfadepost" class="linkbuttons">
-    <p>Sounds will fade to silence in <span id="timedfademinutesleft"></span>.</p><p> <a href="#" id="canceltf">Cancel</a></p>
+    <p>Sounds will fade to silence in <span id="timedfademinutesleft"></span>.</p><p> <a href="#" id="canceltf">Cancel</a></p>  
+    </div>
     </div>
   <a href="#" class="show_hide">Hide</a>
+  
   </div>
 </div>
 

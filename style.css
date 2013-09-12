@@ -413,22 +413,16 @@ html {
   padding: 2px 10px 2px 10px;
 }
 
-#optionsleft,
-#optionsright {
-  width: 50%;
-  height: 100%;
-  margin-bottom: 15px;
-}
-
-#optionsleft {
-  float:left;
-}
-
-#optionsright {
-  float:right;
-}
-
 #timedpausepost,
 #timedfadepost {
   display:none;
+}
+
+#optionscontainer {
+  margin-right: 20%;
+  text-align: right;
+}
+
+#resetspan {
+ margin-right: 5%;
 }
