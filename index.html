@@ -293,11 +293,16 @@ $('label').on('click', false);
 
   $(".optionshidden").hide();
   $(".show_hide").show();
+  
+  $(".sharehidden").hide();
  
   $('.show_hide').click(function(){
     $(".optionshidden").slideToggle();
   });
 
+  $('.sharetoggle').click(function(){
+    $(".sharehidden").slideToggle();
+  }); 
 
 // function to show and hide options menu
 
@@ -507,6 +512,98 @@ tfbutton.click(function(){
 })
 
 // timed fade: fade all to silence over x minutes
+// end of code for options menu
+
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+// get query strings from url
+
+var urlvhex = getParameterByName("v");
+
+if(urlvhex !== null){
+
+  var queryvolumes = urlvhex.match(/.{1,2}/g) // split query string into array of 2char values
+// note to self: this is what an array is
+  
+  var queryrainvolume = parseInt(queryvolumes[0], 16) / 100; // convert value 0 to decimal, divide by 100
+  rainslider.val(queryrainvolume);
+  rainslider.slider("refresh");
+  
+  var querythundervolume = parseInt(queryvolumes[1], 16) / 100;
+  thunderslider.val(querythundervolume);
+  thunderslider.slider("refresh");
+  
+  var queryfirevolume = parseInt(queryvolumes[2], 16) / 100;
+  fireslider.val(queryfirevolume);
+  fireslider.slider("refresh");
+  
+  var querywavesvolume = parseInt(queryvolumes[3], 16) / 100;
+  wavesslider.val(querywavesvolume);
+  wavesslider.slider("refresh");
+  
+  var querybirdsvolume = parseInt(queryvolumes[4], 16) / 100;
+  birdsslider.val(querybirdsvolume);
+  birdsslider.slider("refresh");
+  
+  var queryhumansvolume = parseInt(queryvolumes[5], 16) / 100;
+  humansslider.val(queryhumansvolume);
+  humansslider.slider("refresh");   
+}
+
+// if query string is present, set sliders to value in string
+// this section will always set the volume using query string, if present.
+
+var share = $("#share");
+var showshareurl = $("#showshareurl");
+
+share.click( function() {
+
+  
+  var raindec = rainslider.val() * 100;
+  var rainhex = raindec.toString(16);
+  if (rainhex.length < 2) {
+    rainhex = "0" + rainhex;
+  }
+  
+  var thunderdec = thunderslider.val() * 100;
+  var thunderhex = thunderdec.toString(16);
+  if (thunderhex.length < 2) {
+    thunderhex = "0" + thunderhex;
+  }
+  
+  var firedec = fireslider.val() * 100;
+  var firehex = firedec.toString(16);
+  if (firehex.length < 2) {
+    firehex = "0" + firehex;
+  }
+  
+  var wavesdec = wavesslider.val() * 100;
+  var waveshex = wavesdec.toString(16);
+  if (waveshex.length < 2) {
+    waveshex = "0" + waveshex;
+  }
+  
+  var birdsdec = birdsslider.val() * 100;
+  var birdshex = birdsdec.toString(16);
+  if (birdshex.length < 2) {
+    birdshex = "0" + birdshex;
+  }
+  
+  var humansdec = humansslider.val() * 100;
+  var humanshex = humansdec.toString(16);
+  if (humanshex.length < 2) {
+    humanshex = "0" + humanshex;
+  }          
+
+  showshareurl.text("http://asoftmurmur.com?v=" + rainhex + thunderhex + firehex + waveshex + birdshex + humanshex);
+
+})
+
+
+// write url with query string when called
 
 $(window).load(function(){
 
@@ -541,7 +638,12 @@ $(window).load(function(){
 <div id="page-container">
 
 <div id="share-buttons">
-  <span id="facebook"><a href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://asoftmurmur.com&amp;p[images][0]=&amp;p[title]=A%20Soft%20Murmur&amp;p[summary]=Relaxing%20ambient%20background%20noise" target="_blank">Facebook</a></span><span id="twitter"><a href="http://twitter.com/home?status=I'm%20enjoying%20relaxing%20ambient%20background%20noise%20from%20asoftmurmur.com%20@asoftmurmur" target="_blank">Twitter</a></span><span id="googleplus"><a href="https://plus.google.com/share?url=http://asoftmurmur.com" target="_blank">Google+</a></span>
+  <a href="#" id="share" class="sharetoggle">Share</a>
+    <div class="sharehidden">
+      <p>Share your custom mix:</p>
+      <p><span id="showshareurl"></span>
+      <a href="#" id="hideshare" class="sharetoggle">Hide</a>
+    </div>
 </div>
 
 <div id="site-title">

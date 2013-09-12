@@ -398,6 +398,7 @@ html {
 
 /* Style for show and hide options menu */
 
+.sharehidden,
 .optionshidden {
     height: 100%;
     margin: 10px 0 10px 0;
