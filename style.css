@@ -133,9 +133,12 @@ html {
   margin-right: 5%;
 }
 
+.otext a,
 .dtext a {
   color: #000;
 }
+
+/* Share stuff */
 
 #share-buttons,
 #footer {
@@ -148,9 +151,35 @@ html {
   text-shadow: none;
 }
 
+.sharetoggle,
+.sharelink {
+  text-decoration: none;
+  color: #FFF;
+  border: 2px solid #FFF;
+  padding: 2px 10px 2px 10px;
+  margin: 0px 20px 0px 20px;
+}
+
 #share-buttons {
   padding: 10px;
 }
+
+#socialbuttons p {
+  margin-bottom: 17px;
+}
+
+#plast {
+  margin-bottom: 0 !important;
+}
+
+#showshareurl {
+  background-color: #FFF;
+  color: #000;
+  padding: 5px 10px 5px 10px;
+  border: 1px dashed #000;
+}
+
+/* end of share stuff */
 
 #footer {
   padding: 5px 0 10px 0;
@@ -170,7 +199,6 @@ html {
   padding-bottom: 0px;
 }
 
-#share-buttons a,
 #footer a {
   text-shadow: none !important;
   color: white !important;
@@ -304,6 +332,60 @@ html {
   border-bottom: 3px solid #000;
 }
 
+/* Style info page */
+
+#infopage {
+  font-size: 1em;
+  font-family: Helvetica;
+  max-width: 40em;
+  margin: 0 auto 0 auto;
+}
+
+/* Style for show and hide options menu */
+
+.sharehidden,
+.optionshidden {
+    height: 100%;
+    margin: 10px 0 10px 0;
+}
+ 
+.show_hide {
+    display:none;
+}
+
+#optionsbutton,
+.linkbuttons a {
+  text-decoration: none;
+  border: 2px solid #000;
+  padding: 2px 10px 2px 10px;
+}
+
+#timedpausepost,
+#timedfadepost {
+  display:none;
+}
+
+#optionscontainer {
+  margin-right: 30%;
+  text-align: right;
+}
+
+#resetdiv {
+ margin-bottom: 1.4em;
+}
+
+#reset {
+  margin-bottom: 5px;
+}
+
+.otext {
+  font-family: Montserrat;
+  font-size: 0.8em;
+  text-align: center;
+  -webkit-text-stroke: 0.3px;
+  color: #000;
+}
+
 /* Begin responsive settings for smaller viewports */
 
 @media screen and (max-width: 640px) {
@@ -321,6 +403,10 @@ html {
   #site-title {
     font-size: 1.3em;
   }
+  
+   #optionscontainer  {
+    margin-right: 20%;
+   }
   
   .dtext {
     font-size: 0.8em;
@@ -347,6 +433,12 @@ html {
     font-size: 1em;
   }
   
+  #optionscontainer  {
+    margin-right: 15%;
+    margin-left: 15%;
+    font-size: 1em;
+  }
+  
   .dtext {
     font-size: 0.8em;
   }
@@ -368,6 +460,25 @@ html {
 
 @media screen and (max-width: 340px) {
 
+  #showshareurl {
+    font-size: 0.7em
+  }
+  
+/**  .blockspan {
+    display: block;
+    margin-top: 10px;
+  } **/
+  
+  #resetdiv {
+    margin-bottom: 1.9em;
+  }
+  
+  #optionscontainer  {
+  margin-right: 5%;
+  margin-left: 5%;
+  font-size: 0.75em;
+  }
+
   #site-title {
     font-size: 0.7em;
   }
@@ -387,43 +498,3 @@ html {
 
 /* end */
 
-/* Style info page */
-
-#infopage {
-  font-size: 1em;
-  font-family: Helvetica;
-  max-width: 40em;
-  margin: 0 auto 0 auto;
-}
-
-/* Style for show and hide options menu */
-
-.sharehidden,
-.optionshidden {
-    height: 100%;
-    margin: 10px 0 10px 0;
-}
- 
-.show_hide {
-    display:none;
-}
-
-.linkbuttons a {
-  text-decoration: none;
-  border: 2px solid #000;
-  padding: 2px 10px 2px 10px;
-}
-
-#timedpausepost,
-#timedfadepost {
-  display:none;
-}
-
-#optionscontainer {
-  margin-right: 20%;
-  text-align: right;
-}
-
-#resetspan {
- margin-right: 5%;
-}

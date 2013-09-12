@@ -291,6 +291,8 @@ $('label').on('click', false);
 
 // prevent tap bringing up input dialogue on mobile devices
 
+var optionsbutton = $("#optionsbutton");
+
   $(".optionshidden").hide();
   $(".show_hide").show();
   
@@ -298,6 +300,15 @@ $('label').on('click', false);
  
   $('.show_hide').click(function(){
     $(".optionshidden").slideToggle();
+    
+    var optionstext = optionsbutton.text()
+
+    if( optionstext.indexOf( "Options" ) !== -1 ) {
+      optionsbutton.text("Hide");
+    }
+    else {
+      optionsbutton.text("Options");
+    }
   });
 
   $('.sharetoggle').click(function(){
@@ -561,49 +572,68 @@ var showshareurl = $("#showshareurl");
 
 share.click( function() {
 
-  
-  var raindec = rainslider.val() * 100;
+  var sharetext = share.text()
+
+  if( sharetext.indexOf( "Share" ) !== -1 ) {
+    share.text("Hide");
+  }
+  else {
+    share.text("Share");
+  }
+
+  var raindec = Math.round(rainslider.val() * 100);
   var rainhex = raindec.toString(16);
   if (rainhex.length < 2) {
     rainhex = "0" + rainhex;
   }
   
-  var thunderdec = thunderslider.val() * 100;
+  var thunderdec = Math.round(thunderslider.val() * 100);
   var thunderhex = thunderdec.toString(16);
   if (thunderhex.length < 2) {
     thunderhex = "0" + thunderhex;
   }
   
-  var firedec = fireslider.val() * 100;
+  var firedec = Math.round(fireslider.val() * 100);
   var firehex = firedec.toString(16);
   if (firehex.length < 2) {
     firehex = "0" + firehex;
   }
   
-  var wavesdec = wavesslider.val() * 100;
+  var wavesdec = Math.round(wavesslider.val() * 100);
   var waveshex = wavesdec.toString(16);
   if (waveshex.length < 2) {
     waveshex = "0" + waveshex;
   }
   
-  var birdsdec = birdsslider.val() * 100;
+  var birdsdec = Math.round(birdsslider.val() * 100);
   var birdshex = birdsdec.toString(16);
   if (birdshex.length < 2) {
     birdshex = "0" + birdshex;
   }
   
-  var humansdec = humansslider.val() * 100;
+  var humansdec = Math.round(humansslider.val() * 100);
   var humanshex = humansdec.toString(16);
   if (humanshex.length < 2) {
     humanshex = "0" + humanshex;
   }          
 
-  showshareurl.text("http://asoftmurmur.com?v=" + rainhex + thunderhex + firehex + waveshex + birdshex + humanshex);
-
+  var hexquery = rainhex + thunderhex + firehex + waveshex + birdshex + humanshex
+  var hexurl = "http://asoftmurmur.com?v=" + hexquery
+  
+  showshareurl.text(hexurl);
+  
+  var facebooklink = $("#facebooklink");
+  var twitterlink = $("#twitterlink");  
+  var googlepluslink = $("#googlepluslink");  
+  
+  facebooklink.attr("href", "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + hexurl + "&p[images][0]=&p[title]=My%20ambient%20noise%20mix%20at%20A%20Soft%20Murmur&p[summary]=I%20made%20this%20mix%20of%20ambient%20sounds%20at%20asoftmurmur.com%20-%20Check%20it%20out!");
+  twitterlink.attr("href", "http://twitter.com/home?status=Here's%20my%20custom%20ambient%20noise%20mix%20from%20asoftmurmur.com%20-%20" + hexurl);
+  googlepluslink.attr("href", "https://plus.google.com/share?url=" + hexurl);
 })
 
 
 // write url with query string when called
+//write social urls
 
 $(window).load(function(){
 
@@ -640,9 +670,16 @@ $(window).load(function(){
 <div id="share-buttons">
   <a href="#" id="share" class="sharetoggle">Share</a>
     <div class="sharehidden">
-      <p>Share your custom mix:</p>
-      <p><span id="showshareurl"></span>
-      <a href="#" id="hideshare" class="sharetoggle">Hide</a>
+      <p>Link for your custom mix:</p>
+      <p><span id="showshareurl"></span></p>
+      <p>Share your mix on:</p>
+      <div id="socialbuttons">
+      
+        <p><a href="#" id="facebooklink" target="_blank" class="sharelink">Facebook</a></p>
+        <p><a href="#" id="twitterlink" target="_blank"class="sharelink">Twitter</a></p>
+        <p id="plast"><a href="#" id="googlepluslink" target="_blank"class="sharelink">Google+</a></p>
+      
+      </div>  
     </div>
 </div>
 
@@ -665,29 +702,31 @@ $(window).load(function(){
   <p>Loading...</p>
 </div>
 
-<div id="options" class="dtext">
-  <p><a href="#" class="show_hide">Options</a></p>
+<div id="options" class="otext">
+  <p><a href="#" id="optionsbutton" class="show_hide">Options</a></p>
   <div class="optionshidden">
   <div id="optionscontainer">
   <div id ="buttonoptions" class="linkbuttons">
-        <p>Reset volume levels to default: <a href="#" id="reset">Go</a></p>
-        <p>Set all sounds to silent: <a href="#" id="silence">Go</a></p>
+        <div id="resetdiv"><p>All sounds to default: <a href="#" id="reset">Go</a></p></div>
+        <p>Silence all: <a href="#" id="silence">Go</a></p>
   </div>
     <div id="timedpausepre" class="linkbuttons">
-    <p>Pause after <input type="text" id="minutestillpause" value="10" size ="1"data-role="none" /> minutes: <a href="#" id="timedpausebutton">Go</a></p>
-    </div>
-    <div id="timedpausepost" class="linkbuttons">
-    <p>Sounds will pause in <span id="timedpauseminutesleft"></span>.</p><p> <a href="#" id="canceltp">Cancel</a></p>
+    <p>Pause in <input type="text" id="minutestillpause" value="10" size ="1"data-role="none" /> mins: <a href="#" id="timedpausebutton">Go</a></p>
     </div>
     
     <div id="timedfadepre" class="linkbuttons">
-    <p>Fade to silence over <input type="text" id="minutestillfade" value="10" size ="1" data-role="none" /> minutes: <a href="#" id="timedfadebutton">Go</a></p>
+    <p>Fade to silent in <input type="text" id="minutestillfade" value="10" size ="1" data-role="none" /> mins: <a href="#" id="timedfadebutton">Go</a></p>
+    </div>
+    </div>
+    
+    <div id="post container">
+    <div id="timedpausepost" class="linkbuttons">
+    <p>Sounds will pause in <span id="timedpauseminutesleft"></span>.</p><p> <a href="#" id="canceltp">Cancel</a></p>
     </div>
     <div id="timedfadepost" class="linkbuttons">
     <p>Sounds will fade to silence in <span id="timedfademinutesleft"></span>.</p><p> <a href="#" id="canceltf">Cancel</a></p>  
     </div>
     </div>
-  <a href="#" class="show_hide">Hide</a>
   
   </div>
 </div>
