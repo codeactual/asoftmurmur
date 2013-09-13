@@ -89,6 +89,7 @@ html {
   margin-bottom: 15px;
   margin-left: 5%;
   margin-right: 5%;  
+/**  text-shadow: 0 0 0.5px rgba(0,0,0,1) !important; **/
 }
 
 #loading {
@@ -177,6 +178,7 @@ html {
   color: #000;
   padding: 5px 10px 5px 10px;
   border: 1px dashed #000;
+  line-height: 3em;
 }
 
 /* end of share stuff */
@@ -370,6 +372,10 @@ html {
   text-align: right;
 }
 
+#post-container {
+  margin: 0 5% 0 5%;
+}
+
 #resetdiv {
  margin-bottom: 1.4em;
 }
@@ -433,10 +439,14 @@ html {
     font-size: 1em;
   }
   
+    #showshareurl {
+    font-size: 0.75em
+  }
+  
   #optionscontainer  {
     margin-right: 15%;
     margin-left: 15%;
-    font-size: 1em;
+    font-size: 0.9em;
   }
   
   .dtext {
@@ -461,7 +471,7 @@ html {
 @media screen and (max-width: 340px) {
 
   #showshareurl {
-    font-size: 0.7em
+    font-size: 0.65em
   }
   
 /**  .blockspan {

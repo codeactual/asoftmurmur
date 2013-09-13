@@ -618,16 +618,16 @@ share.click( function() {
   }          
 
   var hexquery = rainhex + thunderhex + firehex + waveshex + birdshex + humanshex
-  var hexurl = "http://asoftmurmur.com?v=" + hexquery
+  var hexurl = "http://asoftmurmur.com/?v=" + hexquery
   
   showshareurl.text(hexurl);
   
   var facebooklink = $("#facebooklink");
   var twitterlink = $("#twitterlink");  
-  var googlepluslink = $("#googlepluslink");  
+  var googlepluslink = $("#googlepluslink");
   
   facebooklink.attr("href", "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + hexurl + "&p[images][0]=&p[title]=My%20ambient%20noise%20mix%20at%20A%20Soft%20Murmur&p[summary]=I%20made%20this%20mix%20of%20ambient%20sounds%20at%20asoftmurmur.com%20-%20Check%20it%20out!");
-  twitterlink.attr("href", "http://twitter.com/home?status=Here's%20my%20custom%20ambient%20noise%20mix%20from%20asoftmurmur.com%20-%20" + hexurl);
+  twitterlink.attr("href", "http://twitter.com/home?status=http://asoftmurmur.com/%3Fv%3D" + hexquery);
   googlepluslink.attr("href", "https://plus.google.com/share?url=" + hexurl);
 })
 
@@ -676,8 +676,8 @@ $(window).load(function(){
       <div id="socialbuttons">
       
         <p><a href="#" id="facebooklink" target="_blank" class="sharelink">Facebook</a></p>
-        <p><a href="#" id="twitterlink" target="_blank"class="sharelink">Twitter</a></p>
-        <p id="plast"><a href="#" id="googlepluslink" target="_blank"class="sharelink">Google+</a></p>
+        <p><a href="#" id="twitterlink" target="_blank" class="sharelink">Twitter</a></p>
+        <p id="plast"><a href="#" id="googlepluslink" target="_blank" class="sharelink">Google+</a></p>
       
       </div>  
     </div>
@@ -711,7 +711,7 @@ $(window).load(function(){
         <p>Silence all: <a href="#" id="silence">Go</a></p>
   </div>
     <div id="timedpausepre" class="linkbuttons">
-    <p>Pause in <input type="text" id="minutestillpause" value="10" size ="1"data-role="none" /> mins: <a href="#" id="timedpausebutton">Go</a></p>
+    <p>Pause in <input type="text" id="minutestillpause" value="10" size ="1" data-role="none" /> mins: <a href="#" id="timedpausebutton">Go</a></p>
     </div>
     
     <div id="timedfadepre" class="linkbuttons">
@@ -719,7 +719,7 @@ $(window).load(function(){
     </div>
     </div>
     
-    <div id="post container">
+    <div id="post-container">
     <div id="timedpausepost" class="linkbuttons">
     <p>Sounds will pause in <span id="timedpauseminutesleft"></span>.</p><p> <a href="#" id="canceltp">Cancel</a></p>
     </div>
