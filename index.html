@@ -578,7 +578,7 @@ share.click( function() {
     share.text("Hide");
   }
   else {
-    share.text("Share");
+    share.text("Share your mix");
   }
 
   var raindec = Math.round(rainslider.val() * 100);
@@ -627,7 +627,7 @@ share.click( function() {
   var googlepluslink = $("#googlepluslink");
   
   facebooklink.attr("href", "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + hexurl + "&p[images][0]=&p[title]=My%20ambient%20noise%20mix%20at%20A%20Soft%20Murmur&p[summary]=I%20made%20this%20mix%20of%20ambient%20sounds%20at%20asoftmurmur.com%20-%20Check%20it%20out!");
-  twitterlink.attr("href", "http://twitter.com/home?status=http://asoftmurmur.com/%3Fv%3D" + hexquery);
+  twitterlink.attr("href", "http://twitter.com/home?status=Check%20out%20my%20custom%20ambient%20noise%20mix:%20asoftmurmur.com/%3Fv%3D" + hexquery + "%20@asoftmurmur");
   googlepluslink.attr("href", "https://plus.google.com/share?url=" + hexurl);
 })
 
@@ -668,7 +668,7 @@ $(window).load(function(){
 <div id="page-container">
 
 <div id="share-buttons">
-  <a href="#" id="share" class="sharetoggle">Share</a>
+  <a href="#" id="share" class="sharetoggle">Share your mix</a>
     <div class="sharehidden">
       <p>Link for your custom mix:</p>
       <p><span id="showshareurl"></span></p>
