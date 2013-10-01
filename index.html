@@ -84,6 +84,19 @@ var canceltf = $('#canceltf');
 var fademinutesinput = $('#minutestillfade');
 
 var ppbutton = $("#play-pause-button");
+
+function loadAudible(player0, player){
+  if(player0.volume > 0.02) {
+    player.attr("preload", "auto");
+  }
+}
+
+loadAudible(rainplayer0, rainplayer);
+loadAudible(thunderplayer0, thunderplayer);
+loadAudible(fireplayer0, fireplayer);
+loadAudible(wavesplayer0, wavesplayer);
+loadAudible(birdsplayer0, birdsplayer);
+loadAudible(humansplayer0, humansplayer);
     
   function playif(player, glueplayer){
       if(player.volume > 0.02) {
